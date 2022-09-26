@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row col-md-12">
+      <nav aria-label="breadcrumb" class="col-md-10">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Master</li>
+          <li class="breadcrumb-item"><a href="pages/master/role">Role</a></li>
+        </ol>
+      </nav>
+      <div class="col-md-2">
+            <button (click)="add()" class="btn btn-primary" >
+              + {{buttonText}}
+            </button>
+        </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-role-list  [events]="roleReloadEvent.asObservable()"
+    (editFromList)="edit($event)">
+
+    </ngx-role-list>
+  </nb-card-body>
+</nb-card>
+

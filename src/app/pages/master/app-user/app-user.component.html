@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row col-md-12">
+      <nav aria-label="breadcrumb" class="col-md-10">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Master</li>
+          <li class="breadcrumb-item"><a href="pages/master/app-user">User</a></li>
+        </ol>
+      </nav>
+      <div class="col-md-2">
+            <button  (click)="add()" class="btn btn-primary" >
+              + {{buttonText}}
+            </button>
+        </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-app-user-list  [events]="userReloadEvent.asObservable()"
+    (editFromList)="edit($event)">
+
+    </ngx-app-user-list>
+  </nb-card-body>
+</nb-card>
+
