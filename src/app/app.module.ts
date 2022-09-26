@@ -5,12 +5,13 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -20,7 +21,16 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://103.108.220.162:8080/ ',
+        realm: 'egovernance',
+        clientId: 'portal',
+      }
+    });
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -39,8 +49,15 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    KeycloakAngularModule
   ],
   bootstrap: [AppComponent],
+  providers:[ {
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService],
+  },]
 })
 export class AppModule {
 }

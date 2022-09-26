@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-
+// import { AdminGuard } from '../auth/admin.guard';
+import { AdminGuard } from '../auth/auth.guard';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -12,7 +13,7 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       loadChildren: () => import('../pages/dashboard/dashboard.module')
-        .then(m => m.DashboardModule),
+        .then(m => m.DashboardModule)//,canActivate:[AdminGuard]
     },
     {
       path: '',
