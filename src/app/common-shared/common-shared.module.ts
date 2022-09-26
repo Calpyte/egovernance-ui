@@ -11,8 +11,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { ResponseModalService } from "./response-modal/response-modal.service";
 import { CommonLibraryModule } from "./common-library/common-library.module";
 import { MaterialModule } from "./material.module";
-import { NbToastrModule } from "@nebular/theme";
+import { NbCardModule, NbToastrModule } from "@nebular/theme";
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { PageHeaderComponent } from "./page-header/page-header.component";
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -27,7 +28,8 @@ const maskConfig: Partial<IConfig> = {
     ResponseModalComponent,
     MultiSelectComponent,
     TitleCasePipe,
-    ObjStringPipe
+    ObjStringPipe,
+    PageHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,7 @@ const maskConfig: Partial<IConfig> = {
     MaterialModule,
     NbToastrModule.forRoot(),
     NgxMaskModule.forRoot(maskConfig),
-
+    NbCardModule
   ],
   exports: [
     TableGenericComponent,
@@ -52,6 +54,8 @@ const maskConfig: Partial<IConfig> = {
     MaterialModule,
     NbToastrModule,
     NgxMaskModule,
+    NbCardModule,
+    PageHeaderComponent
   ],
   entryComponents: [ActionPopupComponent],
   providers: [ResponseModalService],

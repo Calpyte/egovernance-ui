@@ -15,52 +15,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'FEATURES',
     group: true,
   },
-  
-  {
-    title: 'Location',
-    icon: 'layout-outline',
-    children: [
-      {
-        title: 'Country',
-        link: '/pages/location/country',
-      },
-    ],
-  },
 
   {
-    title: 'Master',
+    title: 'User',
     icon: 'layout-outline',
     children: [
       {
         title: 'Department',
-        link: '/pages/master/department',
+        link: '/pages/department',
       },
-      {
-        title: 'Role',
-        link: '/pages/master/role',
-      },
-      {
-        title: 'User',
-        link: '/pages/master/app-user',
-      },
-      {
-        title: 'Office',
-        link: '/pages/master/office',
-      },
-    ],
-  },
-  {
-    title: 'Transaction',
-    icon: 'layout-outline',
-    children: [
-      // {
-      //   title: 'Transaction',
-      //   link: '/pages/transaction/coordinates-txn',
-      // },
-      {
-        title: 'Transaction Location',
-        link: '/pages/transaction/user-location',
-      }
     ],
   },
   // {

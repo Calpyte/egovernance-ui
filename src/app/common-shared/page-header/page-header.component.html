@@ -1,0 +1,14 @@
+<section class="pr-section pr-title-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <h1 class="page-ttl" style="margin-left: 2%">{{ title }}</h1>
+    </div>
+    <div
+      class="col-auto align-self-center"
+      *ngIf="isAddShow"
+      (click)="addClick(null)"
+    >
+      <button mat-stroked-button color="primary">+<span style="padding-left: 20px;">{{ buttonText }}</span></button>
+    </div>
+  </div>
+</section>

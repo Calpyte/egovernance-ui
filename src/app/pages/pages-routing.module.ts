@@ -21,6 +21,11 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
+      path: 'department',
+      loadChildren: () => import('../pages/department/department.module')
+        .then(m => m.DepartmentModule)//,canActivate:[AdminGuard]
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },
