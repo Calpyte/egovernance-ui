@@ -8,26 +8,7 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-    {
-      path: 'miscellaneous',
-      loadChildren: () => import('./miscellaneous/miscellaneous.module')
-        .then(m => m.MiscellaneousModule),
-    },
-    {
-      path: 'master',
-      loadChildren: () => import('../pages/master/master.module')
-        .then(m => m.MasterModule),
-    },
-    {
-      path: "location",
-      loadChildren: () => import('../pages/location/location.module')
-      .then(m => m.LocationModule),
-    },
-    {
-      path: 'transaction',
-      loadChildren: () => import('../pages/transaction/transaction.module')
-        .then(m => m.TransactionModule),
-    },
+
     {
       path: 'dashboard',
       loadChildren: () => import('../pages/dashboard/dashboard.module')
