@@ -24,6 +24,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Department',
         link: '/pages/department',
       },
+      {
+        title: 'Role',
+        link: '/pages/role',
+      },
+      {
+        title: 'User',
+        link: '/pages/user',
+      },
     ],
   },
   // {

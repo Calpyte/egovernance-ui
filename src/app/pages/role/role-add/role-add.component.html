@@ -8,32 +8,34 @@
     (click)="cancel()"
   >
     <span aria-hidden="true">&times;</span>
+
   </div>
 </div>
 
-<form name="form"  #departmentForm="ngForm">
+<form [formGroup]="roleForm">
   <div class="modal-body">
-    <div class="row">
-      <div class="form-group col-md-12">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" name="name" [(ngModel)]="departmentModel.name" #name="ngModel" 
-          [ngClass]="{ 'is-invalid': departmentForm.submitted && name.invalid }" required/>
-          <div *ngIf="departmentForm.submitted && name.invalid" class="invalid-feedback">
-            <div *ngIf="name.errors.required">Name is required</div>
-        </div>
-        </mat-form-field>
+    <div class="form-group col-md-12">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" formControlName="name" />
+        <mat-error *ngIf="basic.name.hasError('required')"
+          >Name is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-12" style="padding-top: 20px;">
+      <div>
+        <mat-slide-toggle formControlName="isActive">Enabled/Disabled</mat-slide-toggle>
       </div>
     </div>
-
-
+ 
   </div>
   <div class="modal-footer">
     <div class="form-group text-right mb-0">
       <button
         class="btn btn-primary waves-effect waves-light mr-1"
         type="submit"
-        (click)="submitForm(departmentForm)"
+        (click)="submitForm()"
       >
         Submit
       </button>

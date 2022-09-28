@@ -9,7 +9,11 @@ export class AppConfiguration {
   baseUrl = environment.baseUrl;
 
   role={
-    save:"",
+    save:"governance/role/save",
+    get:"governance/role",
+    getById:"governance/role/by-id?id=",
+    delete:"governance/role/delete?id=",
+    getAll: "",
   }
   department={
     save:"governance/department/save",

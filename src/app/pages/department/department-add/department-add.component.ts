@@ -14,12 +14,9 @@ import { DepartmentService } from '../department.service';
 export class DepartmentAddComponent implements OnInit {
   @Output() saveEvent = new EventEmitter();
   isSubmit: boolean;
-  imageUploaded: boolean = false;
   departmentModel: any;
   id: string;
   title: string;
-  test: string;
-  fileName: string;
   url: string;
   constructor(
     public formBuilder: FormBuilder,

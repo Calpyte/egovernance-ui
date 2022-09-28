@@ -1,10 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-
 import { PagesComponent } from './pages.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-// import { AdminGuard } from '../auth/admin.guard';
-import { AdminGuard } from '../auth/auth.guard';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -24,6 +21,16 @@ const routes: Routes = [{
       path: 'department',
       loadChildren: () => import('../pages/department/department.module')
         .then(m => m.DepartmentModule)//,canActivate:[AdminGuard]
+    },
+    {
+      path: 'role',
+      loadChildren: () => import('../pages/role/role.module')
+        .then(m => m.RoleModule)
+    },
+    {
+      path: 'user',
+      loadChildren: () => import('../pages/user/user.module')
+        .then(m => m.UserModule)
     },
     {
       path: '**',
