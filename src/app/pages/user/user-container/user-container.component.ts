@@ -26,7 +26,7 @@ export class UserContainerComponent implements OnInit {
     let data = { title: this.buttonText };
     // this.router.navigate(["pages/user/add"]);
     this.openModal(UserAddComponent, data);
-  };  
+  };
 
   openModal = (component: any, data: any) => {
     this.matDialogRef = this.responseModalService.openModalSM(component, data);

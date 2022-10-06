@@ -12,7 +12,6 @@ import { OfficeService } from '../office.service';
   styleUrls: ['./office-add.component.scss']
 })
 export class OfficeAddComponent implements OnInit {
-
   @ViewChild("departmentMultiSelect", { static: false }) departmentMultiSelectComponent: MultiSelectComponent;
   @Output() saveEvent = new EventEmitter();
   title: String;
@@ -23,7 +22,7 @@ export class OfficeAddComponent implements OnInit {
   selectedDepartments: any = [];
 
   constructor(
-    public dialogRef: MatDialogRef<any>,  
+    public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private commonToastrService: CommonToastrService,
     private officeService: OfficeService,
@@ -47,7 +46,7 @@ export class OfficeAddComponent implements OnInit {
         .then((data: any) => {
           this.selectedDepartments=data.department;
           this.id = data?.id;
-          this.officeForm.patchValue({ 
+          this.officeForm.patchValue({
             name: data?.name,
             description: data?.description,
             lat: data?.lat,
@@ -60,20 +59,19 @@ export class OfficeAddComponent implements OnInit {
   }
 
     submitForm = () => {
-      this.isSubmit = true; 
-      // this.departmentMultiSelectComponent.formInvalid();
+      this.isSubmit = true;
+       this.departmentMultiSelectComponent.formInvalid();
       this.saveEvent.emit(true);
       this.officeForm.patchValue({
         department: this.selectedDepartments
       })
       let data = this.officeForm?.value;
       if (this.id) {
-        data.id = this.id;  
+        data.id = this.id;
       }
-      // data['isDeleted']= false;
       this.sendForm(data);
     };
-  
+
     sendForm = (data) => {
       if (!this.officeForm.invalid) {
         this.officeService
@@ -81,16 +79,18 @@ export class OfficeAddComponent implements OnInit {
           .toPromise()
           .then((data: any) => {
             this.cancel();
-        this.commonToastrService.showSuccess("Added Successfully","Office");
+             this.commonToastrService.showSuccess("Added Successfully","Office");
           });
       }
     };
+
+
     getDepartments=()=>{
       this.officeService.getAllDepartments().toPromise().then((data:any[])=>{
          this.departments = data;
       })
     }
-    
+
     get basic() {
       return this.officeForm.controls;
     }

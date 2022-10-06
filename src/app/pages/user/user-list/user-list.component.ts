@@ -34,7 +34,6 @@ export class UserListComponent implements OnInit {
         this.filters.push(data);
       }
       this.loadData();
-      alert(data);
     });
 
     this.loadData();

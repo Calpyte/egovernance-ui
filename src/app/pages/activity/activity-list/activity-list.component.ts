@@ -1,30 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
-import { OfficeService } from '../office.service';
+import { ActivityService } from '../activity.service';
 
 @Component({
-  selector: 'ngx-office-list',
-  templateUrl: './office-list.component.html',
-  styleUrls: ['./office-list.component.scss']
+  selector: 'ngx-activity-list',
+  templateUrl: './activity-list.component.html',
+  styleUrls: ['./activity-list.component.scss']
 })
-export class OfficeListComponent implements OnInit {
-
+export class ActivityListComponent implements OnInit {
   private eventsSubscription: Subscription;
+  matDialogRef: MatDialogRef<any>;
   @Input() events: Observable<void>;
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
-  @Output() deleteFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["Name","Description","Latitude","longitude","actions"];
-  searchColumns: any[] = [{ name: "name", canShow: true },{ name: "description", canShow: true }];
-  definedColumns = ["name", "description", "lat", "lon"];
-  filters: any[] = [];
+  displayedColumns: string[] = ["ratings"];
+  searchColumns: any[] = [
+    { name: "ratings", canShow: false },
+
+  ];
+  definedColumns = ["ratings"];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;
-  offices: any[] = [];
-
-  constructor(private officeService: OfficeService) { }
+  banners: any[] = [];
+  filters: any[] = [];
+  constructor(private activityService: ActivityService) {}
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((data) => {
@@ -36,26 +38,21 @@ export class OfficeListComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() {
-    this.officeService
-      .getOffice(this.postPerPage, this.pageNumber, this.filters)
-      .toPromise()
-      .then((datas: any) => {
-        datas.data.forEach(element => {
-          if(element){
-            this.offices.push(element);
-          }
-        });
-        this.datatrigger.emit(this.offices);
+  loadData = () => {
+    this.activityService
+      .getActivities(this.postPerPage, this.pageNumber, this.filters)
+      .subscribe((datas: any) => {
+        this.banners = datas?.data;
+        this.datatrigger.emit(this.banners);
         this.count = datas?.recordsTotal;
       });
-  }
-
+  };
   onPaginate = (pageObject) => {
     this.postPerPage = pageObject.postPerPage;
     this.pageNumber = pageObject.pageNumber;
     this.loadData();
   };
+
   edit = (rowId: any) => {
     this.editFromList.emit(rowId);
   };
@@ -64,6 +61,4 @@ export class OfficeListComponent implements OnInit {
     this.filters = filters;
     this.loadData();
   };
-
-
 }
