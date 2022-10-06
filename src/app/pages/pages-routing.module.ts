@@ -38,6 +38,11 @@ const routes: Routes = [{
         .then(m => m.OfficeModule)
     },
     {
+      path: 'activity',
+      loadChildren: () => import('../pages/activity/activity.module')
+        .then(m => m.ActivityModule)
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },

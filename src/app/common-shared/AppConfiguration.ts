@@ -35,10 +35,14 @@ export class AppConfiguration {
     get: "governance/office",
     getById: "governance/office/by-id?id=",
     delete: "",
-    getAll:"governance/office/", 
+    getAll:"governance/office/",
   }
   getCharts="";
 
   uploadFile="";
+
+  activity={
+    getActivities:"governance/activity"
+  }
 
 }

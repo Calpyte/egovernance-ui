@@ -21,11 +21,7 @@ export class AuthGuard extends KeycloakAuthGuard  {
         redirectUri: window.location.origin + state.url,
       });
     }
-
     return this.authenticated;
   }
-
-
-
 
 }

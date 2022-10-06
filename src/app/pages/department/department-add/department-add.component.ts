@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { Form, FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import {  FormBuilder,  NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
-import { AppConfiguration } from '../../../common-shared/AppConfiguration';
 import { CommonToastrService } from '../../../common-shared/common-toastr/common-toastr.service';
 import { DepartmentService } from '../department.service';
 
@@ -17,7 +15,6 @@ export class DepartmentAddComponent implements OnInit {
   departmentModel: any;
   id: string;
   title: string;
-  url: string;
   constructor(
     public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<any>,
@@ -34,14 +31,12 @@ export class DepartmentAddComponent implements OnInit {
     if(!!departmentData){
       this.departmentModel=departmentData;
     }
-
     this.isSubmit = false;
   }
 
    submitForm = async(data:NgForm) => {
     if(data.valid){
       this.isSubmit = true;
-
       await this.sendForm();
       this.saveEvent.emit(true);
     }
