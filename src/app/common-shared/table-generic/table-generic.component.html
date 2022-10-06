@@ -39,8 +39,8 @@
       </table>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" fxFlex="50">
-      <p matTooltip="{{ row[column].name}}" *ngIf="!!row[column].name"  class="ellipsis">{{ row[column].name }}</p>
-      <p matTooltip="{{ row[column] }}" *ngIf="!!!row[column].name" class="ellipsis" >{{ row[column] }}</p>
+      <p matTooltip="{{ row[column]?.name}}" *ngIf="!!row[column]?.name"  class="ellipsis">{{ row[column]?.name }}</p>
+      <p matTooltip="{{ row[column] }}" *ngIf="!!!row[column]?.name" class="ellipsis" >{{ row[column] }}</p>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="status">

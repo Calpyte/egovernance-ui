@@ -19,15 +19,14 @@
         <mat-label>Name</mat-label>
         <input matInput type="text" name="name" formControlName="name" />
         <mat-error *ngIf="basic.name.hasError('required')"
-          >Name is required</mat-error
-        >
+          >Name is required</mat-error >
       </mat-form-field>
     </div>
-    <div class="form-group col-md-12" style="padding-top: 20px;">
+    <!-- <div class="form-group col-md-12" style="padding-top: 20px;">
       <div>
         <mat-slide-toggle formControlName="isActive">Enabled/Disabled</mat-slide-toggle>
       </div>
-    </div>
+    </div> -->
  
   </div>
   <div class="modal-footer">

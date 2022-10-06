@@ -33,6 +33,11 @@ const routes: Routes = [{
         .then(m => m.UserModule)
     },
     {
+      path: 'office',
+      loadChildren: () => import('../pages/office/office.module')
+        .then(m => m.OfficeModule)
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },

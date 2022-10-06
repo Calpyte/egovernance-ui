@@ -1,3 +1,4 @@
-<p>
-  user-list works!
-</p>
+<table-generic [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns" [searchColumns]="searchColumns"
+               [canShowSearch]="true" [data]="users" [isAction]="true" [datatrigger]="datatrigger" (editRow)='edit($event)'
+               (paginate)='onPaginate($event)'  (searchEvent)='onSearch($event)'>
+</table-generic>

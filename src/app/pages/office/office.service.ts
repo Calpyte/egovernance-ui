@@ -5,33 +5,30 @@ import { CommonHttpClientService } from '../../common-shared/commonHttpService';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class OfficeService {
 
 constructor(
   private commonHttpClientService: CommonHttpClientService,
   private appConfiguration: AppConfiguration
 ) { }
 
-addUser = (data) => {
-  return this.commonHttpClientService.httpPost(
-    this.appConfiguration.user.save,
-    data
-  );
-};
-
-getAllUsers = () => {
-return this.commonHttpClientService.httpGet(
-  this.appConfiguration.user.getAll,
+addOffice = (data) => {
+return this.commonHttpClientService.httpPost(
+  this.appConfiguration.office.save,
+  data
  );
-};
-
-getUserById = (id) => {
+}; 
+getAllOffice = () => {
   return this.commonHttpClientService.httpGet(
-    this.appConfiguration.user.getById + id
+    this.appConfiguration.office.getAll
   );
 };
-
-getUser = (postPerPage: any, pageNumber: number, filter: any[]) => {
+getOfficeById = (id) => {
+  return this.commonHttpClientService.httpGet(
+    this.appConfiguration.office.getById + id
+  );
+};
+getOffice = (postPerPage: any, pageNumber: number, filter: any[]) => {
   let data = {
     draw: this.randomNumber(),
     filter: filter,
@@ -39,29 +36,17 @@ getUser = (postPerPage: any, pageNumber: number, filter: any[]) => {
     pageSize: postPerPage,
   };
   return this.commonHttpClientService.httpPost(
-    this.appConfiguration.user.get,
+    this.appConfiguration.office.get,
     data
   );
 };
-randomNumber = () => {
-  return Math.floor(Math.random() * 100 + 1);
-};
-
 getAllDepartments = () => {
   return this.commonHttpClientService.httpGet(
     this.appConfiguration.department.getAll
   );
 };
-getAllRoles = () => {
-  return this.commonHttpClientService.httpGet(
-    this.appConfiguration.role.getAll,
-  );
-};
-getAllOffice = () => {
-  return this.commonHttpClientService.httpGet(
-    this.appConfiguration.office.getAll,
-  );
-};
 
-
+randomNumber = () => {
+  return Math.floor(Math.random() * 100 + 1);
+};
 }

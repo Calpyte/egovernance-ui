@@ -1,0 +1,34 @@
+<nb-card>
+  <nb-card-header>
+    <section class="pr-section pr-breadcrumbs-sec">
+      <div class="row">
+        <div class="col-12 align-self-start">
+          <nav aria-label="breadcrumb">
+            <ol class="pr-breadcrumb breadcrumb st">
+              <li class="breadcrumb-item"><a class="st">Pages</a></li>
+              <li class="breadcrumb-item">
+                <a class="st" href="pages/office">Office</a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </section>
+    <ngx-page-header
+      [title]="title"
+      [buttonText]="buttonText"
+      (addEvent)="add()"
+    ></ngx-page-header>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="pr-section">
+      <div class="br21 st">
+        <div class="pr-datatable-wrap">
+          <ngx-office-list [events]="officesReloadEvent.asObservable()"
+          (editFromList)="edit($event)">
+          </ngx-office-list>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

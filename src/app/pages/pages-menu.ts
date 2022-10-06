@@ -32,6 +32,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'User',
         link: '/pages/user',
       },
+      {
+        title: 'Office',
+        link: '/pages/office',
+      },
     ],
   },
   // {

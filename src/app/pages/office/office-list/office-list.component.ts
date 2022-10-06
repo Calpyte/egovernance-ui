@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CommonToastrService } from '../../../common-shared/common-toastr/common-toastr.service';
-import { ResponseModalService } from '../../../common-shared/response-modal/response-modal.service';
-import { UserService } from '../user.service';
+import { OfficeService } from '../office.service';
 
 @Component({
-  selector: 'ngx-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  selector: 'ngx-office-list',
+  templateUrl: './office-list.component.html',
+  styleUrls: ['./office-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class OfficeListComponent implements OnInit {
 
   private eventsSubscription: Subscription;
   @Input() events: Observable<void>;
@@ -17,16 +16,16 @@ export class UserListComponent implements OnInit {
   @Output() editFromList = new EventEmitter();
   @Output() deleteFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["firstName","mobileNo","actions"];
-  searchColumns: any[] = [{ firstName: "firstName", mobileNo: "mobileNo",canShow: true }];
-  definedColumns = ["firstName","mobileNo"];
+  displayedColumns: string[] = ["Name","Description","Latitude","longitude","actions"];
+  searchColumns: any[] = [{ name: "name", canShow: true },{ name: "description", canShow: true }];
+  definedColumns = ["name", "description", "lat", "lon"];
   filters: any[] = [];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;
-  users: any[] = [];
+  offices: any[] = [];
 
-  constructor(private userService: UserService) { }
+  constructor(private officeService: OfficeService) { }
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((data) => {
@@ -34,19 +33,21 @@ export class UserListComponent implements OnInit {
         this.filters.push(data);
       }
       this.loadData();
-      alert(data);
     });
-
     this.loadData();
   }
 
   loadData() {
-    this.userService
-      .getUser(this.postPerPage, this.pageNumber, this.filters)
+    this.officeService
+      .getOffice(this.postPerPage, this.pageNumber, this.filters)
       .toPromise()
       .then((datas: any) => {
-        this.users = datas?.data;
-        this.datatrigger.emit(this.users);
+        datas.data.forEach(element => {
+          if(element){
+            this.offices.push(element);
+          }
+        });
+        this.datatrigger.emit(this.offices);
         this.count = datas?.recordsTotal;
       });
   }
@@ -64,5 +65,6 @@ export class UserListComponent implements OnInit {
     this.filters = filters;
     this.loadData();
   };
+
 
 }

@@ -13,14 +13,29 @@ export class AppConfiguration {
     get:"governance/role",
     getById:"governance/role/by-id?id=",
     delete:"governance/role/delete?id=",
-    getAll: "",
+    getAll: "governance/role/",
   }
   department={
     save:"governance/department/save",
     get:"governance/department",
     getById:"governance/department/by-id?id=",
     delete:"",
-    getAll:"",
+    getAll:"governance/department/",
+  }
+  user={
+    save:"governance/user/save",
+    get:"governance/user",
+    getById:"governance/user/by-id?id=",
+    delete:"",
+    getAll:"governance/user/",
+  }
+
+  office={
+    save: "governance/office/save",
+    get: "governance/office",
+    getById: "governance/office/by-id?id=",
+    delete: "",
+    getAll:"governance/office/", 
   }
   getCharts="";
 
