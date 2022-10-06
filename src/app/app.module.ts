@@ -21,16 +21,19 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-function initializeKeycloak(keycloak: KeycloakService) {
+import { environment } from '../environments/environment';
+export function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://103.108.220.162:8080/ ',
-        realm: 'egovernance',
-        clientId: 'portal',
+        url:environment.loginUrl,
+        realm: environment.realm,
+        clientId: environment.clientId,
       }
     });
 }
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
