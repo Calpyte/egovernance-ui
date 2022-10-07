@@ -14,8 +14,8 @@ export class OfficeContainerComponent implements OnInit {
   matDialogRef: MatDialogRef<any>;
   officesReloadEvent: Subject<void> = new Subject<void>();
 
-  title: string = "Office";            //To set the title for page header
-  buttonText: string = "Add Office";   //To set the add button text for page header
+  title: string = "Office";
+  buttonText: string = "Add Office";
   editData: any = {};
 
   constructor(private responseModalService: ResponseModalService) { }

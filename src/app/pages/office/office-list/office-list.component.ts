@@ -41,11 +41,7 @@ export class OfficeListComponent implements OnInit {
       .getOffice(this.postPerPage, this.pageNumber, this.filters)
       .toPromise()
       .then((datas: any) => {
-        datas.data.forEach(element => {
-          if(element){
-            this.offices.push(element);
-          }
-        });
+        this.offices = datas?.data;
         this.datatrigger.emit(this.offices);
         this.count = datas?.recordsTotal;
       });

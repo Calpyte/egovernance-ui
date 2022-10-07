@@ -10,7 +10,6 @@ import { DepartmentService } from '../department.service';
 })
 export class DepartmentListComponent implements OnInit {
   private eventsSubscription: Subscription;
-  matDialogRef: MatDialogRef<any>;
   @Input() events: Observable<void>;
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
