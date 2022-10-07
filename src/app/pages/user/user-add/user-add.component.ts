@@ -36,7 +36,7 @@ export class UserAddComponent implements OnInit {
 
 
   constructor(
-    public dialogRef: MatDialogRef<any>,  
+    public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private commonToastrService: CommonToastrService,
     private userService: UserService,
@@ -68,7 +68,7 @@ export class UserAddComponent implements OnInit {
           this.selectedRoles=data.role;
           this.selectedOffices=data.office;
           this.id = data?.id;
-          this.userForm.patchValue({ 
+          this.userForm = this.formBuilder.group({
             firstName: data?.firstName,
             lastName: data?.lastName,
             mobileNo: data?.mobileNo,

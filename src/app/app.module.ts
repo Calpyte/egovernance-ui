@@ -5,7 +5,7 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule,APP_INITIALIZER } from '@angular/core';
+import { NgModule,APP_INITIALIZER, DoBootstrap, ApplicationRef } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -22,14 +22,19 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import { environment } from '../environments/environment';
-export function initializeKeycloak(keycloak: KeycloakService) {
+export function initializeKeycloak(keycloak: KeycloakService):() => Promise<any>  {
   return () =>
-    keycloak.init({
+     keycloak.init({
       config: {
         url:environment.loginUrl,
         realm: environment.realm,
         clientId: environment.clientId,
-      }
+      },
+      // initOptions:{
+      //   checkLoginIframe:true,
+      //   checkLoginIframeInterval:25
+      // },
+      // loadUserProfileAtStartUp:true
     });
 }
 
@@ -63,4 +68,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
   },]
 })
 export class AppModule {
+
+
+
 }

@@ -40,27 +40,25 @@ export class OfficeAddComponent implements OnInit {
       department:[""],
     });
     if (this.data.id) {
-      this.officeService
-        .getOfficeById(this.data?.id)
-        .toPromise()
-        .then((data: any) => {
-          this.selectedDepartments=data.department;
-          this.id = data?.id;
-          this.officeForm.patchValue({
-            name: data?.name,
-            description: data?.description,
-            lat: data?.lat,
-            lon: data?.lon,
-            department:this.selectedDepartments
-          });
-        });
+      this.officeService.getOfficeById(this.data?.id).subscribe((data:any)=>{
+        this.selectedDepartments=data.department;
+        this.id = data?.id;
+        this.officeForm = this.formBuilder.group({
+          name: data?.name,
+          description: data?.description,
+          lat: data?.lat,
+          lon: data?.lon,
+          department:this.selectedDepartments
+      });
+    });
     }
     this.isSubmit = false;
   }
 
+
     submitForm = () => {
       this.isSubmit = true;
-       this.departmentMultiSelectComponent.formInvalid();
+      //  this.departmentMultiSelectComponent.formInvalid();
       this.saveEvent.emit(true);
       this.officeForm.patchValue({
         department: this.selectedDepartments
