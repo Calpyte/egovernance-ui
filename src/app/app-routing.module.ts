@@ -8,6 +8,7 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { AuthGuard } from './guard/auth.guard';
 export const routes: Routes = [
   {
     path: 'pages',
@@ -55,6 +56,7 @@ const config: ExtraOptions = {
 @NgModule({
   imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
+  providers:[AuthGuard]
 })
 export class AppRoutingModule {
 }

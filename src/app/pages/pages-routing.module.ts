@@ -30,19 +30,16 @@ const routes: Routes = [{
     },
     {
       path: 'user',
-
       loadChildren: () => import('../pages/user/user.module')
         .then(m => m.UserModule)
     },
     {
       path: 'office',
-
       loadChildren: () => import('../pages/office/office.module')
         .then(m => m.OfficeModule)
     },
     {
       path: 'activity',
-
       loadChildren: () => import('../pages/activity/activity.module')
         .then(m => m.ActivityModule)
     },

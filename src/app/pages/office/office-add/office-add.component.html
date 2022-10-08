@@ -55,16 +55,14 @@
         appearance="fill"
         class="full-width"
       >
-        <app-multi-select
-          #departme ntMultiSelect
-          isMultiSelect="false"
-          [options]="departments"
-          label="Department"
-          [isSubmit]="isSubmit"
-          [isRequired]="true"
-          [(dropDownValue)]="selectedDepartments"
-        >
-        </app-multi-select>
+      <ngx-dropdown
+      [selectControl]="departmentControl"
+      label="department"
+      [options]="departments"
+      (selectionChange)="onSelectionChange($event)"
+      isMultiple="false"
+      [(selectedOption)]="selectedDepartments"
+      ></ngx-dropdown>
       </div>
     </div>
     <!-- <div class="form-group col-md-12" style="padding-top: 20px;">
