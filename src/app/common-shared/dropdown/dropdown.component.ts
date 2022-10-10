@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { ReplaySubject, Subject} from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit,OnChanges,OnDestroy {
+export class DropdownComponent implements OnInit,OnChanges,OnDestroy{
   @Input() label :String;
   @Input() options: any[];
   @Output() selectionChange = new EventEmitter<any>();
@@ -18,19 +17,14 @@ export class DropdownComponent implements OnInit,OnChanges,OnDestroy {
   @Input() selectControl:FormControl;
   public searchControl: FormControl = new FormControl();
   public searchFilter: any = new ReplaySubject(1);
-  stop$ = new Subject<void>();
 
   constructor() {}
+  ngOnDestroy(): void {this.searchFilter.complete()}
 
   ngOnChanges(){this.searchFilter.next(this.options.slice())}
 
   ngOnInit() {
-    this.searchFilter.next(this.options.slice());
-    this.searchControl.valueChanges.pipe(takeUntil(this.stop$)).subscribe(()=>this.filter());
-  }
-  ngOnDestroy() {
-    this.stop$.next();
-    this.stop$.complete();
+    this.searchControl.valueChanges.subscribe(()=>this.filter());
   }
 
   onSelectionChange=(event:any)=>{
