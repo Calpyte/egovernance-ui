@@ -1,36 +1,43 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import {  takeUntil } from 'rxjs/operators';
+import { ReplaySubject, Subject} from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit,OnChanges {
+export class DropdownComponent implements OnInit,OnChanges,OnDestroy {
   @Input() label :String;
   @Input() options: any[];
   @Output() selectionChange = new EventEmitter<any>();
   @Input() selectedOption:any = "";
   @Input() isMultiple:Boolean = false;
-  public searchControl: FormControl = new FormControl();
+  @Input() appearance = "fill";
   @Input() selectControl:FormControl;
+  public searchControl: FormControl = new FormControl();
   public searchFilter: any = new ReplaySubject(1);
+  stop$ = new Subject<void>();
 
   constructor() {}
-  ngOnChanges(changes: SimpleChanges): void {
-    this.searchFilter.next(this.options.slice());
-  }
+
+  ngOnChanges(){this.searchFilter.next(this.options.slice())}
 
   ngOnInit() {
     this.searchFilter.next(this.options.slice());
-    this.searchControl.valueChanges.subscribe(()=>{this.filter()});
+    this.searchControl.valueChanges.pipe(takeUntil(this.stop$)).subscribe(()=>this.filter());
+  }
+  ngOnDestroy() {
+    this.stop$.next();
+    this.stop$.complete();
   }
 
   onSelectionChange=(event:any)=>{
+    this.selectedOption = event;
     this.selectionChange.emit(event);
   }
+
   protected filter() {
     if (!this.options) {
       return;
@@ -43,9 +50,7 @@ export class DropdownComponent implements OnInit,OnChanges {
       search = search.toLowerCase();
     }
     this.searchFilter.next(
-      this.options.filter(
-        (option) => option.name.toLowerCase().indexOf(search) > -1
-      )
+      this.options.filter((option) => option.name.toLowerCase().indexOf(search) > -1)
     );
   }
 
