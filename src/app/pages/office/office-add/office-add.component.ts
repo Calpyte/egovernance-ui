@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonToastrService } from '../../../common-shared/common-toastr/common-toastr.service';
 import { MultiSelectComponent } from '../../../common-shared/multi-select/multi-select.component';
@@ -12,7 +12,6 @@ import { OfficeService } from '../office.service';
   styleUrls: ['./office-add.component.scss']
 })
 export class OfficeAddComponent implements OnInit {
-  @ViewChild("departmentMultiSelect", { static: false }) departmentMultiSelectComponent: MultiSelectComponent;
   @Output() saveEvent = new EventEmitter();
   title: String;
   officeForm: FormGroup;
@@ -20,6 +19,7 @@ export class OfficeAddComponent implements OnInit {
   isSubmit: boolean;
   departments: any = [];
   selectedDepartments: any = [];
+  departmentControl = new FormControl("",Validators.required);
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -37,36 +37,34 @@ export class OfficeAddComponent implements OnInit {
       description: ["", [Validators.required, trimValidator]],
       lat: ["", [Validators.required, trimValidator]],
       lon: ["", [Validators.required, trimValidator]],
-      department:[""],
+      department:this.departmentControl,
     });
     if (this.data.id) {
       this.officeService.getOfficeById(this.data?.id).subscribe((data:any)=>{
-        this.selectedDepartments=data.department;
         this.id = data?.id;
         this.officeForm = this.formBuilder.group({
           name: data?.name,
           description: data?.description,
           lat: data?.lat,
           lon: data?.lon,
-          department:this.selectedDepartments
+          department:this.departmentControl.setValue(data?.department)
       });
     });
     }
     this.isSubmit = false;
   }
 
-
+  onSelectionChange(event:any){
+   this.selectedDepartments = event;
+  }
     submitForm = () => {
       this.isSubmit = true;
-      //  this.departmentMultiSelectComponent.formInvalid();
       this.saveEvent.emit(true);
-      this.officeForm.patchValue({
-        department: this.selectedDepartments
-      })
       let data = this.officeForm?.value;
       if (this.id) {
         data.id = this.id;
       }
+      console.log(data);
       this.sendForm(data);
     };
 

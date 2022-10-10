@@ -14,6 +14,7 @@ import { MaterialModule } from "./material.module";
 import { NbCardModule, NbToastrModule } from "@nebular/theme";
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { PageHeaderComponent } from "./page-header/page-header.component";
+import { DropdownComponent } from "./dropdown/dropdown.component";
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -29,7 +30,8 @@ const maskConfig: Partial<IConfig> = {
     MultiSelectComponent,
     TitleCasePipe,
     ObjStringPipe,
-    PageHeaderComponent
+    PageHeaderComponent,
+    DropdownComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ const maskConfig: Partial<IConfig> = {
     NbToastrModule,
     NgxMaskModule,
     NbCardModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    DropdownComponent
   ],
   entryComponents: [ActionPopupComponent],
   providers: [ResponseModalService],

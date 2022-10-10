@@ -1,9 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { AuthGuard } from '../../guard/auth.guard';
 import { ActivityComponent } from './activity.component';
 
 const routes: Routes = [
-  { path:'',component:ActivityComponent},
+  { path:'',component:ActivityComponent, canActivate:[AuthGuard]},
 ];
 
 export const ActivityRoutes = RouterModule.forChild(routes);
