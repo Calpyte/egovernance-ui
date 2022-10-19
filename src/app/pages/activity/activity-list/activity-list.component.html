@@ -1,4 +1,4 @@
 <table-generic [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns" [searchColumns]="searchColumns"
-               [canShowSearch]="true" [data]="banners" [isAction]="false" [datatrigger]="datatrigger" (editRow)='edit($event)'
-               (paginate)='onPaginate($event)' (searchEvent)='onSearch($event)' >
+               [canShowSearch]="true" [data]="banners" [isAction]="false" [datatrigger]="datatrigger"
+               (paginate)='onPaginate($event)' (searchEvent)='onSearch($event)' [isDetail]="true" (detailRow)="detail($event)" >
 </table-generic>

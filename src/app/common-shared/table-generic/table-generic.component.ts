@@ -58,6 +58,7 @@ export class TableGenericComponent implements OnInit {
   deleteObject: any;
   filters: any[] = [];
   panelOpenState: boolean = false;
+  counter = Array;
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
