@@ -1,19 +1,26 @@
 <nb-card>
   <nb-card-header>
-    <div class="row col-md-12">
-      <nav aria-label="breadcrumb" class="col-md-10">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">pages</li>
-          <li class="breadcrumb-item"><a href="pages/user">User</a></li>
-        </ol>
-      </nav>
-      <div class="col-md-2">
-            <button  (click)="add()" class="btn btn-primary" >
-              + {{buttonText}}
-            </button>
+    <section class="pr-section pr-breadcrumbs-sec">
+      <div class="row">
+        <div class="col-12 align-self-start">
+          <nav aria-label="breadcrumb">
+            <ol class="pr-breadcrumb breadcrumb st">
+              <li class="breadcrumb-item"><a class="st">Pages</a></li>
+              <li class="breadcrumb-item">
+                <a class="st" href="pages/user">User</a>
+              </li>
+            </ol>
+          </nav>
         </div>
-    </div>
+      </div>
+    </section>
+    <ngx-page-header
+    [title]="title"
+    [buttonText]="buttonText"
+    (addEvent)="add()"
+  ></ngx-page-header>
   </nb-card-header>
+
   <nb-card-body>
     <ngx-user-list  [events]="userReloadEvent.asObservable()"
     (editFromList)="edit($event)">

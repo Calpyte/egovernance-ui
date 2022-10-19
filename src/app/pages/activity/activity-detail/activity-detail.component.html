@@ -4,8 +4,7 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<nb-card>
-  <nb-card-body>
+
     <section>
       <div class="table-responsive">
     <table  style="width: 100%; border-spacing: .5px;border-collapse: separate;" class="table table-bordered">
@@ -14,39 +13,74 @@
            <b>Activity</b>
         </td>
         <td>
-           {{detailPageData?.name}}
+           {{detailPageData?.activity}}
+        </td>
+      </tr>
+      <!-- <tr>
+        <td class="data">
+           <b>Catalogue</b>
+        </td>
+        <td>
+          <P *ngFor="let cat of detailPageData?.catalogue">{{cat?.name}},</P>
+        </td>
+      </tr> -->
+      <tr>
+        <td class="data">
+           <b>Office</b>
+        </td>
+        <td>
+          {{detailPageData?.office?.name}}
         </td>
       </tr>
       <tr>
         <td class="data">
-           <b>Activity</b>
+           <b>Department</b>
         </td>
         <td>
-           {{detailPageData?.name}}
+          {{detailPageData?.office?.department?.name}}
+        </td>
+      </tr>
+      <tr>
+        <td class="data">
+           <b>Ratings</b>
+        </td>
+        <td>
+          <div class="row" style="margin-left: 2%;">
+            <span *ngFor="let number of counter(detailPageData?.ratings)" class="fa fa-star checked"></span >
+          </div>
         </td>
       </tr>
       <tr>
         <td class="data">
            <b>Is Office Open</b>
         </td>
-        <td>
-           {{detailPageData?.isOfficeOpen}}
+        <td *ngIf="detailPageData?.isOfficeOpen">
+          <mat-icon class="icon-done">done</mat-icon>
+        </td>
+        <td *ngIf="!detailPageData?.isOfficeOpen">
+          <mat-icon class="icon-cancel">clear</mat-icon>
         </td>
       </tr>
       <tr>
         <td class="data">
            <b>Is All Staff Present</b>
         </td>
-        <td>
-           {{detailPageData?.isAllStaffPresent}}
+        <td *ngIf="detailPageData?.isAllStaffPresent">
+          <mat-icon class="icon-done">done</mat-icon>
+        </td>
+        <td *ngIf="!detailPageData?.isAllStaffPresent">
+          <mat-icon class="icon-cancel">clear</mat-icon>
         </td>
       </tr>
       <tr>
         <td class="data">
            <b>Is Leave Register Maintained</b>
         </td>
-        <td>
-           {{detailPageData?.isLeaveRegisterMaintained}}
+        <td *ngIf="detailPageData?.isLeaveRegisterMaintained">
+          <mat-icon class="icon-done">done</mat-icon>
+        </td>
+        <td *ngIf="!detailPageData?.isLeaveRegisterMaintained">
+          <mat-icon class="icon-cancel">clear</mat-icon>
         </td>
       </tr>
       <tr>
@@ -54,7 +88,7 @@
            <b>Latitude & Longitude</b>
         </td>
         <td>
-           {{detailPageData?.latitude}},{{detailPageData?.Longitude}}
+           {{detailPageData?.latitude}},{{detailPageData?.longitude}}
         </td>
       </tr>
       <tr>
@@ -69,7 +103,8 @@
           matTooltip="Detail"
           (click)="firstImg(detailPageData?.firstImage)"
         >
-          <mat-icon>remove_red_eye</mat-icon>
+          <mat-icon>photo_library</mat-icon>
+          <!-- <mat-icon>launch</mat-icon> -->
         </button>
         </td>
       </tr>
@@ -85,24 +120,11 @@
           matTooltip="Detail"
           (click)="secondImg(detailPageData?.secondImage)"
         >
-          <mat-icon>remove_red_eye</mat-icon>
+          <mat-icon>photo_library</mat-icon>
         </button>
         </td>
       </tr>
-      <tr>
-        <td class="data">
-           <b>Ratings</b>
-        </td>
-        <td>
-          <div class="row" style="margin-left: 2%;">
-            <span *ngFor="let rating of ratings" class="fa fa-star checked"></span >
-          </div>
-        </td>
-      </tr>
     </table>
-    <img [src]="imageURL" style="width: 20%; height:20%"/>
   </div>
     </section>
-  </nb-card-body>
-</nb-card>
 
