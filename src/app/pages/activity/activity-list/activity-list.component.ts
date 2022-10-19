@@ -17,12 +17,9 @@ export class ActivityListComponent implements OnInit {
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["name","ratings","actions"];
-  searchColumns: any[] = [
-    { name: "name", canShow: false }
-
-  ];
-  definedColumns = ["name"];
+  displayedColumns: string[] = ["office","isOfficeOpen","isAllStaffPresent","isLeaveRegisterMaintained","ratings","actions"];
+  searchColumns: any[] = [];
+  definedColumns = ["office"];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;

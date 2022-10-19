@@ -59,6 +59,7 @@ export class TableGenericComponent implements OnInit {
   filters: any[] = [];
   panelOpenState: boolean = false;
   counter = Array;
+  icon:any={true:"done",false:"clear"};
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,

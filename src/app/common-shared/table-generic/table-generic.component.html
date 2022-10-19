@@ -64,6 +64,30 @@
       </div>
     </mat-cell>
   </ng-container>
+  <ng-container matColumnDef="isAllStaffPresent">
+    <mat-header-cell *matHeaderCellDef>
+      <b><span class="mat-header-generic">Is All Staff Present</span></b>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-icon  [ngClass]="row?.isAllStaffPresent ? 'icon-done' : 'icon-cancel'" >{{icon[row?.isAllStaffPresent]}}</mat-icon>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="isOfficeOpen">
+    <mat-header-cell *matHeaderCellDef>
+      <b><span class="mat-header-generic">Is Office Open</span></b>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-icon  [ngClass]="row?.isOfficeOpen ? 'icon-done' : 'icon-cancel'" >{{icon[row?.isOfficeOpen]}}</mat-icon>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="isLeaveRegisterMaintained">
+    <mat-header-cell *matHeaderCellDef>
+      <b><span class="mat-header-generic">Is LeaveRegister Maintained</span></b>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <mat-icon  [ngClass]="row?.isLeaveRegisterMaintained ? 'icon-done' : 'icon-cancel'" >{{icon[row?.isLeaveRegisterMaintained]}}</mat-icon>
+    </mat-cell>
+  </ng-container>
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef>
       <b><span class="mat-header-generic">Actions</span></b>

@@ -15,7 +15,8 @@ export class ActivityDetailComponent implements OnInit {
   title:any = "Activity";
   ratings:any = [];
   img:Blob;
-  imageURL:SafeUrl
+  imageURL:SafeUrl;
+  counter = Array;
 
 
   constructor( public dialogRef: MatDialogRef<any>,

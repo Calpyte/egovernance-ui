@@ -60,7 +60,11 @@ export class OfficeAddComponent implements OnInit {
     submitForm = () => {
       this.isSubmit = true;
       this.saveEvent.emit(true);
+      this.officeForm.patchValue({
+        department : this.selectedDepartments
+      })
       let data = this.officeForm?.value;
+
       if (this.id) {
         data.id = this.id;
       }
