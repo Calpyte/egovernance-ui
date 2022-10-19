@@ -10,6 +10,7 @@ import { catchError } from "rxjs/operators";
 import { ResponseModalService } from "./response-modal/response-modal.service";
 import { error } from "@angular/compiler/src/util";
 import { CommonToastrService } from "./common-toastr/common-toastr.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -34,7 +35,8 @@ export class CommonHttpClientService {
     private appConfiguration: AppConfiguration,
     private injector: Injector,
     private zone: NgZone,
-    private commonToastrService: CommonToastrService
+    private commonToastrService: CommonToastrService,
+    private sanitizer: DomSanitizer
   ) {
     this.baseUrl = this.appConfiguration.baseUrl;
   }
@@ -46,6 +48,15 @@ export class CommonHttpClientService {
         return throwError(error);
       })
     );
+  };
+
+  httpImageGet = (url: string) => {
+     return this.httpClient.get(this.baseUrl + url, { responseType: 'blob' }).map(val => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(val))).pipe(
+          catchError((error) => {
+            this.errorHandler(error);
+            return throwError(error);
+          })
+     );
   };
 
   httpPost = (url: string, data: any) => {

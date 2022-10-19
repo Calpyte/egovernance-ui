@@ -27,4 +27,18 @@ randomNumber = () => {
   return Math.floor(Math.random() * 100 + 1);
 };
 
+getActivityById = (id) => {
+  return this.commonHttpClientService.httpGet(
+    this.appConfiguration.activity.getActivityById + id
+  );
+};
+
+getImgById = (id) => {
+  return this.commonHttpClientService.httpGet(
+    this.appConfiguration.file.getImgById + id
+  );
+};
+
+
+
 }

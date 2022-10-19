@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
+import { ResponseModalService } from '../../../common-shared/response-modal/response-modal.service';
+import { ActivityDetailComponent } from '../activity-detail/activity-detail.component';
 import { ActivityService } from '../activity.service';
 
 @Component({
@@ -15,18 +17,18 @@ export class ActivityListComponent implements OnInit {
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["ratings"];
+  displayedColumns: string[] = ["name","ratings","actions"];
   searchColumns: any[] = [
-    { name: "ratings", canShow: false },
+    { name: "name", canShow: false }
 
   ];
-  definedColumns = ["ratings"];
+  definedColumns = ["name"];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;
   banners: any[] = [];
   filters: any[] = [];
-  constructor(private activityService: ActivityService) {}
+  constructor(private activityService: ActivityService,private responseModalService:ResponseModalService) {}
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((data) => {
@@ -53,8 +55,10 @@ export class ActivityListComponent implements OnInit {
     this.loadData();
   };
 
-  edit = (rowId: any) => {
-    this.editFromList.emit(rowId);
+  detail = (rowId: any) => {
+    this.activityService.getActivityById(rowId).toPromise().then((data:any)=>{
+      this.responseModalService.openModalRight(ActivityDetailComponent,data);
+    })
   };
 
   onSearch = (filters: any[]) => {

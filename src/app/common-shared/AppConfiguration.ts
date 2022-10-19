@@ -39,10 +39,18 @@ export class AppConfiguration {
   }
   getCharts="";
 
-  uploadFile="";
+  uploadFile={
+
+  };
+
+  file ={
+    getImgById:"governance/file/get/by-id?id="
+  }
 
   activity={
-    getActivities:"governance/activity"
+    getActivities:"governance/activity",
+    getActivityById:"governance/activity/by-id?id=",
+    getAllActivities:"governance/activity/",
   }
 
 }
