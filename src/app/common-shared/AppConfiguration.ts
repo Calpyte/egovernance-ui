@@ -41,7 +41,8 @@ export class AppConfiguration {
   getCharts="";
 
   dashboard={
-    getCount : "governance/dashboard/count"
+    getCount : "governance/dashboard/count",
+    getChart:"governance/dashboard/top-activities"
   }
 
   uploadFile={

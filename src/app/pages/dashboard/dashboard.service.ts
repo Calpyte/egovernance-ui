@@ -18,15 +18,15 @@ export class DashboardService {
   constructor(private commonHttpClientService: CommonHttpClientService,
     private appConfiguration: AppConfiguration) { }
 
-    getDashBoardChart = () => {
-      return this.commonHttpClientService.httpGet(
-        this.appConfiguration.getCharts
-      );
-    };
-
     getDashBoardCount = () => {
       return this.commonHttpClientService.httpGet(
         this.appConfiguration.dashboard.getCount
+      );
+    };
+
+    getDashBoardChart = () => {
+      return this.commonHttpClientService.httpGet(
+        this.appConfiguration.dashboard.getChart
       );
     };
 

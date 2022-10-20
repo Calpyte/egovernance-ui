@@ -22,6 +22,10 @@ export class UserChartsComponent implements OnInit {
 
   count:any = [];
 
+  charts:any;
+  categories:any = Array;
+  ratings:any = Array;
+
 
   constructor(private dashboardService: DashboardService) {
 
@@ -31,7 +35,17 @@ export class UserChartsComponent implements OnInit {
     this.dashboardService.getDashBoardCount().toPromise().then((data:any[])=>{
       this.cardArray = data;
     })
-    this.createChart(this.activityChart.nativeElement, this.myOptions);
+    this.dashboardService.getDashBoardChart().toPromise().then((data:any)=>{
+      this.charts = data;
+      this.charts?.chartData.forEach(element => {
+        this.myOptions.series[0].data.push(element?.rating);
+        this.myOptions.xAxis.categories.push(element?.key);
+      });
+      this.myOptions.yAxis.title.text = this.charts?.ytitle;
+      this.myOptions.title.text = this.charts?.title;
+      this.myOptions.series[0].name = this.charts?.xtitle;
+      this.createChart(this.activityChart.nativeElement, this.myOptions);
+    })
   }
   createChart(el, cfg) {
     Highcharts.chart(el, cfg);
@@ -40,19 +54,19 @@ export class UserChartsComponent implements OnInit {
   myOptions = {
     chart: {type: 'column'},
     title: {
-      text: "Top 5 Offices By Activity Ratings"
+      text: ""
     },
     xAxis: {
       min: 0,
       // title:{
       //   text:"Offices"
       // },
-       categories: ['Office 1', 'Office 2', 'Office 3', 'Office 4', 'Office 5']
+       categories: []
     },
     yAxis: {
       min: 0,
       title: {
-        text: 'Ratings'
+        text: ""
       }
     },
     legend: {
@@ -64,8 +78,8 @@ export class UserChartsComponent implements OnInit {
       }
     },
     series: [{
-      name: 'Office',
-      data: [6, 5, 4, 3, 2]
+      name: '',
+      data: []
     }]
   };
 }
