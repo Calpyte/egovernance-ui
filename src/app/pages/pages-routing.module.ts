@@ -20,28 +20,39 @@ const routes: Routes = [{
     },
     {
       path: 'department',
+      canActivate:[AuthGuard],
       loadChildren: () => import('../pages/department/department.module')
         .then(m => m.DepartmentModule)
     },
     {
       path: 'role',
+      canActivate:[AuthGuard],
       loadChildren: () => import('../pages/role/role.module')
         .then(m => m.RoleModule)
     },
     {
       path: 'user',
+      canActivate:[AuthGuard],
       loadChildren: () => import('../pages/user/user.module')
         .then(m => m.UserModule)
     },
     {
       path: 'office',
+      canActivate:[AuthGuard],
       loadChildren: () => import('../pages/office/office.module')
         .then(m => m.OfficeModule)
     },
     {
       path: 'activity',
+      canActivate:[AuthGuard],
       loadChildren: () => import('../pages/activity/activity.module')
         .then(m => m.ActivityModule)
+    },
+     {
+      path: 'officer',
+      canActivate:[AuthGuard],
+      loadChildren: () => import('../pages/officer/officer.module')
+        .then(m => m.OfficerModule)
     },
     {
       path: '**',

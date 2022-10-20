@@ -24,6 +24,12 @@ export class DashboardService {
       );
     };
 
+    getDashBoardCount = () => {
+      return this.commonHttpClientService.httpGet(
+        this.appConfiguration.dashboard.getCount
+      );
+    };
+
     charts = [];
     createChart(container, options?: any, className?: string) {
       let opts = options;

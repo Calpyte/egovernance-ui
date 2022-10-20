@@ -7,7 +7,7 @@
             <ol class="pr-breadcrumb breadcrumb st">
               <li class="breadcrumb-item"><a class="st">Pages</a></li>
               <li class="breadcrumb-item">
-                <a class="st" href="pages/office">Office</a>
+                <a class="st" href="pages/officer">Officer</a>
               </li>
             </ol>
           </nav>
@@ -24,9 +24,9 @@
     <div class="pr-section">
       <div class="br21 st">
         <div class="pr-datatable-wrap">
-          <ngx-office-list [events]="officesReloadEvent.asObservable()"
+          <ngx-officer-list [events]="officerReloadEvent.asObservable()"
           (editFromList)="edit($event)">
-          </ngx-office-list>
+          </ngx-officer-list>
         </div>
       </div>
     </div>

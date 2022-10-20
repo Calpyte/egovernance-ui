@@ -1,0 +1,167 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{ title }}</h1>
+  <div
+    type="button"
+    class="close"
+    data-dismiss="modal"
+    aria-label="Close"
+    (click)="cancel()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+
+<form [formGroup]="userForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <mat-form-field
+          appearance="fill"
+          class="full-width"
+          style="width: 100%"
+        >
+          <mat-label>Name</mat-label>
+          <input matInput type="text" name="name" formControlName="name" />
+          <mat-error *ngIf="basic.name.hasError('required')"
+            >Name is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6">
+        <mat-form-field
+          appearance="fill"
+          class="full-width"
+          style="width: 100%"
+        >
+          <mat-label>Mobile Number<span class="text-danger"></span></mat-label>
+          <input
+            matInput
+            type="text"
+            mask="(000)000-0000"
+            prefix="+91"
+            name="mobileNumber"
+            formControlName="mobileNumber"
+          />
+          <mat-error *ngIf="basic.mobileNumber.hasError('required')"
+            >Mobile number is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6">
+        <div appearance="fill" class="full-width">
+          <app-multi-select
+            #departmentMultiSelect
+            isMultiSelect="false"
+            [options]="departments"
+            label="Department"
+            [isSubmit]="isSubmit"
+            [isRequired]="true"
+            [(dropDownValue)]="selectedDepartments"
+            (dropDownValueChange)="onDepartmentChange($event)"
+          >
+          </app-multi-select>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <div appearance="fill" class="full-width">
+          <app-multi-select
+            #officesMultiSelect
+            isMultiSelect="false"
+            [options]="offices"
+            label="office"
+            [isSubmit]="isSubmit"
+            [isRequired]="true"
+            [(dropDownValue)]="selectedOffices"
+          >
+          </app-multi-select>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <mat-form-field
+          appearance="fill"
+          class="full-width"
+          style="width: 100%"
+        >
+          <mat-label>Email</mat-label>
+          <input matInput type="text" name="email" formControlName="email" />
+          <mat-error *ngIf="basic.email.hasError('required')"
+            >Email is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-group col-md-6">
+        <mat-form-field
+          appearance="fill"
+          class="full-width"
+          style="width: 100%"
+        >
+          <mat-label>Password </mat-label>
+          <input
+            matInput
+            type="text"
+            name="password"
+            formControlName="password"
+          />
+          <mat-error *ngIf="basic.password.hasError('required')"
+            >Password is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="form-group col-md-6">
+        <div appearance="fill" class="full-width">
+          <app-multi-select
+            #rolesMultiSelect
+            isMultiSelect="false"
+            [options]="roles"
+            label="Roles"
+            [isSubmit]="isSubmit"
+            [isRequired]="true"
+            [(dropDownValue)]="selectedRoles"
+          >
+          </app-multi-select>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <div appearance="fill" class="full-width">
+          <app-multi-select
+            #departmentMultiSelect
+            isMultiSelect="false"
+            [options]="visibilities"
+            label="Data Visibility"
+            [isSubmit]="isSubmit"
+            [isRequired]="true"
+            [(dropDownValue)]="selectedVisibility"
+          >
+          </app-multi-select>
+        </div>
+      </div>
+      <div class="form-group col-md-12" style="padding-top: 20px">
+        <div>
+          <mat-slide-toggle formControlName="isActive"
+            >Is Active</mat-slide-toggle
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="form-group text-right mb-0">
+      <button
+        class="btn btn-primary waves-effect waves-light mr-1"
+        type="submit"
+        (click)="submitForm()"
+      >
+        Submit
+      </button>
+      <button
+        (click)="cancel()"
+        class="btn btn-secondary waves-effect waves-light"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
