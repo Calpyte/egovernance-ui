@@ -17,7 +17,7 @@ return this.commonHttpClientService.httpPost(
   this.appConfiguration.office.save,
   data
  );
-}; 
+};
 getAllOffice = () => {
   return this.commonHttpClientService.httpGet(
     this.appConfiguration.office.getAll
@@ -40,6 +40,14 @@ getOffice = (postPerPage: any, pageNumber: number, filter: any[]) => {
     data
   );
 };
+
+getOfficesByDepartment = (id) => {
+  return this.commonHttpClientService.httpGet(
+    this.appConfiguration.office.getOfficesByDepartment + id
+  );
+};
+
+
 getAllDepartments = () => {
   return this.commonHttpClientService.httpGet(
     this.appConfiguration.department.getAll
@@ -49,4 +57,11 @@ getAllDepartments = () => {
 randomNumber = () => {
   return Math.floor(Math.random() * 100 + 1);
 };
+
+deleteOfficer = (id) => {
+  return this.commonHttpClientService.httpGet(
+    this.appConfiguration.office.delete + id
+  );
+};
+
 }
