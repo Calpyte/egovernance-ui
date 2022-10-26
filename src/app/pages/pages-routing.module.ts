@@ -44,6 +44,11 @@ const routes: Routes = [{
         .then(m => m.ActivityModule)
     },
     {
+      path: 'location',
+      loadChildren: () => import('../pages/location/location.module')
+        .then(m => m.LocationModule)
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },
