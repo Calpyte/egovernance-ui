@@ -25,6 +25,12 @@ const routes: Routes = [{
         .then(m => m.DepartmentModule)
     },
     {
+      path: 'designation',
+      canActivate:[AuthGuard],
+      loadChildren: () => import('../pages/designation/designation.module')
+        .then(m => m.DesignationModule)
+    },
+    {
       path: 'role',
       canActivate:[AuthGuard],
       loadChildren: () => import('../pages/role/role.module')

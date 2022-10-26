@@ -67,4 +67,12 @@ export class AppConfiguration {
     save:"governance/officer/save"
   }
 
+  designation={
+    getAllDesignations:"governance/designation/get-all",
+    getDesignations:"governance/designation/get-pagination",
+    getDesignationById:"governance/designation/by-id?id=",
+    deleteDesignation:"governance/designation/delete?id=",
+    addDesignation:"governance/designation/save"
+  }
+
 }
