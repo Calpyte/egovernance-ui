@@ -106,6 +106,10 @@ export class OfficerAddComponent implements OnInit {
     })
   }
 
+  onRoleChange=(event:any)=>{
+     console.log(event)
+  }
+
   getVillages=()=>{
 
   }

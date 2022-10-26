@@ -120,6 +120,7 @@
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedRoles"
+            (dropDownValueChange)="onRoleChange($event)"
           >
           </app-multi-select>
         </div>
