@@ -5,45 +5,39 @@ import { CommonHttpClientService } from '../../common-shared/commonHttpService';
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
+export class OfficerService {
+
   constructor(
     private commonHttpClientService: CommonHttpClientService,
     private appConfiguration: AppConfiguration
   ) {}
 
-  addDepartment = (data) => {
+  addOfficer = (data) => {
     return this.commonHttpClientService.httpPost(
-      this.appConfiguration.department.save,
+      this.appConfiguration.officer.save,
       data
     );
   };
 
-  getAllDepartments = () => {
+  getAllOfficers = () => {
     return this.commonHttpClientService.httpGet(
-      this.appConfiguration.department.getAll
+      this.appConfiguration.officer.getAllOfficers
     );
   };
 
-
-  getAllDesignation = () => {
+  getOfficerById = (id) => {
     return this.commonHttpClientService.httpGet(
-      this.appConfiguration.department.getAll
+      this.appConfiguration.officer.findById + id
     );
   };
 
-  getDepartmentById = (id) => {
+  deleteOfficer = (id) => {
     return this.commonHttpClientService.httpGet(
-      this.appConfiguration.department.getById + id
+      this.appConfiguration.officer.deleteOfficer + id
     );
   };
 
-  deleteDepartment = (id) => {
-    return this.commonHttpClientService.httpGet(
-      this.appConfiguration.department.delete + id
-    );
-  };
-
-  getDepartment = (postPerPage: any, pageNumber: number, filter: any[]) => {
+  getOfficers = (postPerPage: any, pageNumber: number, filter: any[]) => {
     let data = {
       draw: this.randomNumber(),
       filter: filter,
@@ -51,14 +45,13 @@ export class DepartmentService {
       pageSize: postPerPage,
     };
     return this.commonHttpClientService.httpPost(
-      this.appConfiguration.department.get,
+      this.appConfiguration.officer.getOfficers,
       data
     );
   };
 
-
-
   randomNumber = () => {
     return Math.floor(Math.random() * 100 + 1);
   };
+
 }

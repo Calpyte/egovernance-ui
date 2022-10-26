@@ -23,7 +23,7 @@ export class AppConfiguration {
     get:"governance/department",
     getById:"governance/department/by-id?id=",
     delete:"",
-    getAll:"governance/department/",
+    getAll:"governance/department/"
   }
   user={
     save:"governance/user/save",
@@ -37,10 +37,16 @@ export class AppConfiguration {
     save: "governance/office/save",
     get: "governance/office",
     getById: "governance/office/by-id?id=",
-    delete: "",
+    delete: "governance/office/delete?id=",
     getAll:"governance/office/",
+    getOfficesByDepartment:"governance/office/by-department?id="
   }
   getCharts="";
+
+  dashboard={
+    getCount : "governance/dashboard/count",
+    getChart:"governance/dashboard/top-activities"
+  }
 
   uploadFile={
 
@@ -102,5 +108,21 @@ export class AppConfiguration {
   
    
 
+
+  officer={
+    getOfficers:"governance/officer/get-pagination",
+    getAllOfficers:"governance/officer/get-all",
+    deleteOfficer:"governance/officer/delete?id=",
+    findById:"governance/officer/by-id?id=",
+    save:"governance/officer/save"
+  }
+
+  designation={
+    getAllDesignations:"governance/designation/get-all",
+    getDesignations:"governance/designation/get-pagination",
+    getDesignationById:"governance/designation/by-id?id=",
+    deleteDesignation:"governance/designation/delete?id=",
+    addDesignation:"governance/designation/save"
+  }
 
 }

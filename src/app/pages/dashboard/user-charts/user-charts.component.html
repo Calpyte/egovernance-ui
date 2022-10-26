@@ -1,11 +1,30 @@
 <div class="row col-12">
-      <div class="col-lg-3 col-md-6" *ngFor="let card of cardArray">
+      <div class="col-lg-3" *ngFor="let card of cardArray">
         <div class="card-box bg-white">
           <div class="inner">
-            <h3>{{ card?.value }}</h3>
-            <p>{{ card?.label }}</p>
+            <h3>{{ card?.key }}</h3>
+            <p>{{ card?.value }}</p>
           </div>
         </div>
       </div>
   </div>
-  <div class="row" #charts id="charts"></div>
+  <!-- <div class="row" #charts id="charts"></div> -->
+<nb-card class="card">
+  <nb-card-body>
+      <div class="col-6">
+        <div class="col-12">
+          <app-multi-select
+          #chartMultiSelect
+          isMultiSelect="false"
+          [options]="options"
+          label="Interval"
+          [isRequired]="true"
+          appearance="standard"
+          [(dropDownValue)]="selectedOption"
+        >
+        </app-multi-select>
+        </div>
+        <div id="activity" #activity></div>
+      </div>
+  </nb-card-body>
+</nb-card>

@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { CommonToastrService } from '../../../common-shared/common-toastr/common-toastr.service';
-import { OfficeService } from '../office.service';
+import { OfficerService } from '../officer.service';
 
 @Component({
-  selector: 'ngx-office-list',
-  templateUrl: './office-list.component.html',
-  styleUrls: ['./office-list.component.scss']
+  selector: 'ngx-officer-list',
+  templateUrl: './officer-list.component.html',
+  styleUrls: ['./officer-list.component.scss']
 })
-export class OfficeListComponent implements OnInit {
+export class OfficerListComponent implements OnInit {
 
   private eventsSubscription: Subscription;
   @Input() events: Observable<void>;
@@ -16,16 +16,16 @@ export class OfficeListComponent implements OnInit {
   @Output() editFromList = new EventEmitter();
   @Output() deleteFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["Name","Description","Latitude","longitude","actions"];
-  searchColumns: any[] = [{ name: "name", canShow: true },{ name: "description", canShow: true }];
-  definedColumns = ["name", "description", "lat", "lon"];
+  displayedColumns: string[] = ["Name","actions"];
+  searchColumns: any[] = [{ name: "name", canShow: true }];
+  definedColumns = ["name"];
   filters: any[] = [];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;
-  offices: any[] = [];
+  officers: any[] = [];
 
-  constructor(private officeService: OfficeService,private commonToastrService:CommonToastrService) { }
+  constructor(private officerService: OfficerService,private commonToastrService:CommonToastrService) { }
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((data) => {
@@ -38,12 +38,12 @@ export class OfficeListComponent implements OnInit {
   }
 
   loadData() {
-    this.officeService
-      .getOffice(this.postPerPage, this.pageNumber, this.filters)
+    this.officerService
+      .getOfficers(this.postPerPage, this.pageNumber, this.filters)
       .toPromise()
       .then((datas: any) => {
-        this.offices = datas?.data;
-        this.datatrigger.emit(this.offices);
+        this.officers = datas?.data;
+        this.datatrigger.emit(this.officers);
         this.count = datas?.recordsTotal;
       });
   }
@@ -62,12 +62,11 @@ export class OfficeListComponent implements OnInit {
     this.loadData();
   };
 
-  delete=(id:any)=>[
-    this.officeService.deleteOfficer(id).toPromise().then((data:any)=>{
-      this.commonToastrService.showSuccess("Deleted Successfully","Office");
+  delete(id:any){
+    this.officerService.deleteOfficer(id).toPromise().then((data:any)=>{
+      this.commonToastrService.showSuccess("Deleted Successfully","Officer");
       this.loadData();
-  })
-  ]
-
+    })
+  }
 
 }
