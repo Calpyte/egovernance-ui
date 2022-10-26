@@ -14,12 +14,13 @@ export class DesignationListComponent implements OnInit {
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["Name","actions"];
+  displayedColumns: string[] = ["Name","Department","actions"];
   searchColumns: any[] = [
-    { name: "Name", canShow: false },
+    { name: "name", canShow: true },
+    { name: "department.name", canShow: true },
 
   ];
-  definedColumns = ["name"];
+  definedColumns = ["name","department"];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;
