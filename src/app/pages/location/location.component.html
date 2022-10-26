@@ -8,7 +8,7 @@
             <ol class="pr-breadcrumb breadcrumb st">
               <li class="breadcrumb-item"><a class="st"><b>Master</b></a></li>
               <li class="breadcrumb-item">
-                <a class="st" href="pages/location"><b>Location</b></a>
+                <a class="st" href="pages/master/location"><b>Location</b></a>
               </li>
             </ol>
           </nav>
@@ -26,11 +26,10 @@
       <div class="br21 st">
         <div class="pr-datatable-wrap">
           <nb-card>
-            <!-- <nb-tabset fullWidth (changeTab)="headerTextChanging($event)">
-                            
+            <nb-tabset fullWidth (changeTab)="headerTextChanging($event)">
                               <nb-tab
                                 tabTitle="{{ headings[0] }}"
-                                badgeText="{{ locationCount[headings[1]] }}"
+                                badgeText="{{ locationCount[headings[0]] }}"
                                 badgePosition="center right"
                                 badgeStatus="danger"
                               >
@@ -38,12 +37,12 @@
                                   [events]="stateReloadEvent.asObservable()"
                                   (editFromList)="edit($event)"
                                   (deleteFromList)="delete($event)"
-                                  *ngIf="selectedTab == headings[1]"
+                                  *ngIf="selectedTab == headings[0]"
                                 ></ngx-state-list>
                               </nb-tab>
                               <nb-tab
                               tabTitle="{{ headings[1] }}"
-                              badgeText="{{ locationCount[headings[2]] }}"
+                              badgeText="{{ locationCount[headings[1]] }}"
                               badgePosition="center right"
                               badgeStatus="danger"
                             >
@@ -51,12 +50,12 @@
                                 [events]="districtReloadEvent.asObservable()"
                                 (editFromList)="edit($event)"
                                 (deleteFromList)="delete($event)"
-                                *ngIf="selectedTab == headings[2]"
+                                *ngIf="selectedTab == headings[1]"
                               ></ngx-district-list>
                             </nb-tab>
                             <nb-tab
                             tabTitle="{{ headings[2] }}"
-                            badgeText="{{ locationCount[headings[3]]}}"
+                            badgeText="{{ locationCount[headings[2]]}}"
                             badgePosition="center right"
                             badgeStatus="danger"
                           >
@@ -64,12 +63,12 @@
                               [events]="talukReloadEvent.asObservable()"
                               (editFromList)="edit($event)"
                               (deleteFromList)="delete($event)"
-                              *ngIf="selectedTab == headings[3]"
+                              *ngIf="selectedTab == headings[2]"
                             ></ngx-taluk-list>
                           </nb-tab>
                           <nb-tab
                           tabTitle="{{ headings[3] }}"
-                          badgeText="{{ locationCount[headings[4]] }}"
+                          badgeText="{{ locationCount[headings[3]] }}"
                           badgePosition="center right"
                           badgeStatus="danger"
                         >
@@ -77,10 +76,10 @@
                             [events]="villageReloadEvent.asObservable()"
                             (editFromList)="edit($event)"
                             (deleteFromList)="delete($event)"
-                            *ngIf="selectedTab == headings[4]"
+                            *ngIf="selectedTab == headings[3]"
                           ></ngx-village-list>
                         </nb-tab>
-             </nb-tabset> -->
+             </nb-tabset>
         </nb-card>
 
         </div>
