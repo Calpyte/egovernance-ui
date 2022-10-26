@@ -11,6 +11,8 @@
   <!-- <div class="row" #charts id="charts"></div> -->
 <nb-card class="card">
   <nb-card-body>
+    <form [formGroup]="chartForm">
+
       <div class="col-6">
         <div class="col-12">
           <app-multi-select
@@ -21,10 +23,13 @@
           [isRequired]="true"
           appearance="standard"
           [(dropDownValue)]="selectedOption"
+          (dropDownValueChange)="onOptionChange($event)"
+
         >
         </app-multi-select>
         </div>
         <div id="activity" #activity></div>
       </div>
+      </form>
   </nb-card-body>
 </nb-card>

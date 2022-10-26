@@ -24,9 +24,9 @@ export class DashboardService {
       );
     };
 
-    getDashBoardChart = () => {
+    getDashBoardChart = (type:any) => {
       return this.commonHttpClientService.httpGet(
-        this.appConfiguration.dashboard.getChart
+        this.appConfiguration.dashboard.getPastChart+type
       );
     };
 
