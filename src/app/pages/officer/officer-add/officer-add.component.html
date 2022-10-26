@@ -127,6 +127,20 @@
       <div class="form-group col-md-6">
         <div appearance="fill" class="full-width">
           <app-multi-select
+            #villageMultiSelect
+            isMultiSelect="false"
+            [options]="villages"
+            label="village"
+            [isSubmit]="isSubmit"
+            [isRequired]="true"
+            [(dropDownValue)]="selectedVillage"
+          >
+          </app-multi-select>
+        </div>
+      </div>
+      <!-- <div class="form-group col-md-6">
+        <div appearance="fill" class="full-width">
+          <app-multi-select
             #departmentMultiSelect
             isMultiSelect="false"
             [options]="visibilities"
@@ -137,7 +151,7 @@
           >
           </app-multi-select>
         </div>
-      </div>
+      </div> -->
       <div class="form-group col-md-12" style="padding-top: 20px">
         <div>
           <mat-slide-toggle formControlName="isActive"

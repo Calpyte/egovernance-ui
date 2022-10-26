@@ -29,6 +29,8 @@ export class OfficerAddComponent implements OnInit {
   selectedDepartments: any = [];
   selectedOffices: any = [];
   email: String;
+  villages:any;
+  selectedVillage:any=[];
   visibilities:any = [
    {
     "id":"0","name":"Only me"
@@ -46,9 +48,7 @@ export class OfficerAddComponent implements OnInit {
     "id":"4","name":"All"
    }
   ];
-  selectedVisibility:any ={};
-
-
+  selectedVisibility:any =[];
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -63,6 +63,8 @@ export class OfficerAddComponent implements OnInit {
    ngOnInit() {
      this.getDepartments();
      this.getRoles();
+     this.getVillages();
+
     this.title = this.data?.title;
     this.userForm = this.formBuilder.group({
       name: ["", [Validators.required, trimValidator]],
@@ -102,6 +104,10 @@ export class OfficerAddComponent implements OnInit {
     this.officeService.getOfficesByDepartment(event?.id).toPromise().then((data:any[])=>{
        this.offices = data;
     })
+  }
+
+  getVillages=()=>{
+
   }
 
   submitForm = () => {

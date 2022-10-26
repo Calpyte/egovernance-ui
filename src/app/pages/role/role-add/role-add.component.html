@@ -27,8 +27,22 @@
         <mat-slide-toggle formControlName="isActive">Enabled/Disabled</mat-slide-toggle>
       </div>
     </div> -->
-
+    <div class="form-group col-md-12">
+      <div appearance="fill" class="full-width" >
+        <app-multi-select
+        #visibilityMultiSelect
+        isMultiSelect="false"
+        [options]="visibilities"
+        label="Data visibility"
+        [isSubmit]="isSubmit"
+        [isRequired]="true"
+        [(dropDownValue)]="selectedVisibility"
+      >
+      </app-multi-select>
+      </div>
+    </div>
   </div>
+
   <div class="modal-footer">
     <div class="form-group text-right mb-0">
       <button
@@ -47,3 +61,4 @@
     </div>
   </div>
 </form>
+
