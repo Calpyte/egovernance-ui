@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as Highcharts from 'highcharts';
 import { DashboardService } from '../dashboard.service';
 
@@ -17,25 +18,33 @@ export class UserChartsComponent implements OnInit {
   ];
   jsonData: any = [];
   cardArray: any[] = [];
-  options:any= [{"id":"1","name":"Past 7 days"},{"id":"2","name":"Past 14 days"}];
-  selectedOption = {};
-
+  options:any= [{"id":0,"name":"Past 7 days"},{"id":1,"name":"Past 14 days"}];
+  selectedOption:any = [];
   count:any = [];
-
   charts:any;
   categories:any = Array;
   ratings:any = Array;
+  chartForm:FormGroup;
 
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService,private formBuilder:FormBuilder) {
 
   }
 
   ngOnInit() {
+    this.chartForm = this.formBuilder.group({
+      type:[""]
+    })
     this.dashboardService.getDashBoardCount().toPromise().then((data:any[])=>{
       this.cardArray = data;
     })
-    this.dashboardService.getDashBoardChart().toPromise().then((data:any)=>{
+
+  }
+
+  onOptionChange=(event:any)=>{
+    this.dashboardService.getDashBoardChart(this.selectedOption?.id).toPromise().then((data:any)=>{
+      this.myOptions.series[0].data = [];
+      this.myOptions.xAxis.categories = [];
       this.charts = data;
       this.charts?.chartData.forEach(element => {
         this.myOptions.series[0].data.push(element?.rating);

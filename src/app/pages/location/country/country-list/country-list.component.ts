@@ -1,29 +1,28 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
-import { DistrictService } from '../district.service';
+import { CountryService } from '../country.service';
 
 @Component({
-  selector: 'ngx-district-list',
-  templateUrl: './district-list.component.html',
-  styleUrls: ['./district-list.component.scss']
+  selector: 'ngx-country-list',
+  templateUrl: './country-list.component.html',
+  styleUrls: ['./country-list.component.scss']
 })
-export class DistrictListComponent implements OnInit {
+export class CountryListComponent implements OnInit {
   private eventsSubscription: Subscription;
   @Input() events: Observable<void>;
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
   @Output() deleteFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ['name', 'state', 'actions'];
-  definedColumns = ['name', 'state'];
-  searchColumns: any[] = [{name:'name',canShow:true}, {name:'state.name',canShow:true}];
+  displayedColumns: string[] = ['name', 'actions'];
+  definedColumns = ["name"];
+  searchColumns: any[] = [{name:'name',canShow:true}];
   postPerPage: number = 10;
   pageNumber: number = 1;
   count: number = 0;
-  districts: any[] = [];
-  filters: any[] = [];
-  constructor(private districtService: DistrictService) { }
-
+  countries: any[] = [];
+  filters: any[]=[];
+  constructor(private countryService: CountryService) { }
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((data: any) => {
       if (data) {
@@ -39,19 +38,10 @@ export class DistrictListComponent implements OnInit {
     this.loadData()
   }
   loadData = () => {
-    this.districtService.getDistrict(this.postPerPage, this.pageNumber, this.filters).subscribe((datas: any) => {
-      this.districts = [];
-      datas.data.forEach((data: any, index: number) => {
-        var obj = {
-          name: data.name,
-          country: data?.state?.country?.name,
-          state: data?.state?.name,
-          id: data?.id
-        };
-        this.districts.push(obj);
-      })
+    this.countryService.getCountry(this.postPerPage, this.pageNumber, this.filters).subscribe((datas: any) => {
+      this.countries = datas.data;
+      this.datatrigger.emit(this.countries);
       this.count = datas?.recordsTotal;
-      this.datatrigger.emit(this.districts);
     })
   }
   onPaginate = (pageObject) => {
@@ -63,15 +53,15 @@ export class DistrictListComponent implements OnInit {
   edit = (rowId: any) => {
     this.editFromList.emit(rowId);
   }
-  deleteConfirm = (deleteId: any) => {
-    this.districtService.deleteDistrict(deleteId).subscribe(()=>{
+
+  deleteConfirm = (deleteId:any) => {
+    this.countryService.deleteCountry(deleteId).subscribe((data: any) => {
       this.deleteFromList.emit(deleteId);
       this.loadData();
     })
   }
-
   onSearch = (filters: any[]) => {
-    this.filters = filters
+    this.filters = filters;
     this.loadData();
   }
 }

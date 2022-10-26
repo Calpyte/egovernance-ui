@@ -1,3 +1,67 @@
-<p>
-  village-add works!
-</p>
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+
+<form [formGroup]="villageForm">
+  <div class="modal-body">
+    <div class="row">
+
+      <div class="form-group col-lg-6">
+        <ngx-dropdown
+        [selectControl]="countryControl"
+        label="country"
+        [options]="countries"
+        (selectionChange)="changeState($event)"
+        [(selectedOption)]="selectedCountry"
+        ></ngx-dropdown>
+      </div>
+      <div class="form-group col-lg-6">
+        <ngx-dropdown
+        [selectControl]="stateControl"
+        label="state"
+        [options]="states"
+        (selectionChange)="changeDistrict($event)"
+        [(selectedOption)]="selectedState"
+        ></ngx-dropdown>
+       </div>
+      <div class="form-group col-lg-6">
+        <ngx-dropdown
+          [selectControl]="districtControl"
+          label="district"
+          [options]="districts"
+          (selectionChange)="changeTaluk($event)"
+          [(selectedOption)]="selectedDistrict"
+          ></ngx-dropdown>
+      </div>
+      <div class="form-group col-lg-6">
+        <ngx-dropdown
+        [selectControl]="talukControl"
+        label="taluk"
+        [options]="taluks"
+        (selectionChange)="onTalukChange($event)"
+        [(selectedOption)]="selectedTaluk"
+        ></ngx-dropdown>
+      </div>
+      <div class="form-group col-lg-12">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name<span class="text-danger"></span></mat-label>
+          <input matInput type="text" name="name" formControlName="name" >
+        <mat-error *ngIf="basic.name.hasError('required')">Name Required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="form-group text-right mb-0">
+        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+          Submit
+        </button>
+        <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

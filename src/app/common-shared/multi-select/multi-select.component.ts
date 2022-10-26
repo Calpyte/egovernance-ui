@@ -85,7 +85,7 @@ export class MultiSelectComponent
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.filteredWebsitesMulti.next(this.options.slice());
+    this.filteredWebsitesMulti.next(this.options?.slice());
   }
   onChange = (_) => {};
   onTouched = () => {};
