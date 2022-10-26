@@ -1,0 +1,90 @@
+
+<nb-card>
+  <nb-card-header>
+    <section class="pr-section pr-breadcrumbs-sec">
+      <div class="row">
+        <div class="col-11 align-self-start">
+          <nav aria-label="breadcrumb">
+            <ol class="pr-breadcrumb breadcrumb st">
+              <li class="breadcrumb-item"><a class="st"><b>Master</b></a></li>
+              <li class="breadcrumb-item">
+                <a class="st" href="pages/location"><b>Location</b></a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-md-1">
+            <button nbButton class="float-right" status="primary" hero  (click)="add()">
+              Add
+            </button>
+        </div>
+      </div>
+    </section>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="pr-section">
+      <div class="br21 st">
+        <div class="pr-datatable-wrap">
+          <nb-card>
+            <!-- <nb-tabset fullWidth (changeTab)="headerTextChanging($event)">
+                            
+                              <nb-tab
+                                tabTitle="{{ headings[0] }}"
+                                badgeText="{{ locationCount[headings[1]] }}"
+                                badgePosition="center right"
+                                badgeStatus="danger"
+                              >
+                                <ngx-state-list
+                                  [events]="stateReloadEvent.asObservable()"
+                                  (editFromList)="edit($event)"
+                                  (deleteFromList)="delete($event)"
+                                  *ngIf="selectedTab == headings[1]"
+                                ></ngx-state-list>
+                              </nb-tab>
+                              <nb-tab
+                              tabTitle="{{ headings[1] }}"
+                              badgeText="{{ locationCount[headings[2]] }}"
+                              badgePosition="center right"
+                              badgeStatus="danger"
+                            >
+                              <ngx-district-list
+                                [events]="districtReloadEvent.asObservable()"
+                                (editFromList)="edit($event)"
+                                (deleteFromList)="delete($event)"
+                                *ngIf="selectedTab == headings[2]"
+                              ></ngx-district-list>
+                            </nb-tab>
+                            <nb-tab
+                            tabTitle="{{ headings[2] }}"
+                            badgeText="{{ locationCount[headings[3]]}}"
+                            badgePosition="center right"
+                            badgeStatus="danger"
+                          >
+                            <ngx-taluk-list
+                              [events]="talukReloadEvent.asObservable()"
+                              (editFromList)="edit($event)"
+                              (deleteFromList)="delete($event)"
+                              *ngIf="selectedTab == headings[3]"
+                            ></ngx-taluk-list>
+                          </nb-tab>
+                          <nb-tab
+                          tabTitle="{{ headings[3] }}"
+                          badgeText="{{ locationCount[headings[4]] }}"
+                          badgePosition="center right"
+                          badgeStatus="danger"
+                        >
+                          <ngx-village-list
+                            [events]="villageReloadEvent.asObservable()"
+                            (editFromList)="edit($event)"
+                            (deleteFromList)="delete($event)"
+                            *ngIf="selectedTab == headings[4]"
+                          ></ngx-village-list>
+                        </nb-tab>
+             </nb-tabset> -->
+        </nb-card>
+
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
