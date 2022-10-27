@@ -5,6 +5,7 @@ import { CommonSharedModule } from '../../common-shared/common-shared.module';
 import { UserChartsComponent } from './user-charts/user-charts.component';
 import { DashboardComponent } from './dashboard.component';
 import { NbCardModule } from '@nebular/theme';
+import { GenericChartComponent } from './generic-chart/generic-chart.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { NbCardModule } from '@nebular/theme';
     CommonSharedModule,
     NbCardModule
   ],
-  declarations: [UserChartsComponent,DashboardComponent]
+  declarations: [UserChartsComponent,DashboardComponent,GenericChartComponent]
 })
 export class DashboardModule { }

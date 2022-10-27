@@ -1,0 +1,18 @@
+<nb-card class="card">
+  <nb-card-body>
+    <form [formGroup]="chartForm">
+          <app-multi-select
+          #chartMultiSelect
+          isMultiSelect="false"
+          [options]="options"
+          label="Interval"
+          [isRequired]="true"
+          appearance="standard"
+          [(dropDownValue)]="selectedOption"
+          (dropDownValueChange)="onOptionChange($event)"
+        >
+        </app-multi-select>
+          <div id="chart" #chart></div>
+      </form>
+  </nb-card-body>
+</nb-card>

@@ -36,6 +36,7 @@ export class UserChartsComponent implements OnInit {
 
   activity:Highcharts.Chart;
   activityOption:Highcharts.Options;
+  chartData:any;
 
 
 
@@ -58,6 +59,7 @@ export class UserChartsComponent implements OnInit {
     })
     this.selectedOption = this.options[0];
     this.onOptionChange(0);
+    this.optionChange(this.options[0]);
   }
 
   onOptionChange=(event:any)=>{
@@ -77,6 +79,13 @@ export class UserChartsComponent implements OnInit {
   }
   createChart(el, cfg) {
     Highcharts.chart(el, cfg);
+  }
+
+
+  optionChange=(event:any)=>{
+    this.dashboardService.getDashBoardChart(event?.id).toPromise().then((data:any)=>{
+      this.charts = data;
+    })
   }
 
   myOptions = {
