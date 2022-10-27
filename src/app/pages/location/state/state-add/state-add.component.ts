@@ -16,15 +16,15 @@ export class StateAddComponent implements OnInit {
   public event: EventEmitter<any> = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
   public savetrigger: EventEmitter<any> = new EventEmitter();
-  countries = [];
-  selectedCountry: any;
+  // countries = [];
+  // selectedCountry: any;
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
   isSubmit: boolean = false;
   stateForm: FormGroup;
   id: string;
   title: string;
-  countryControl:FormControl = new FormControl("",Validators.required);
+  // countryControl:FormControl = new FormControl("",Validators.required);
 
 
   constructor(
@@ -38,33 +38,33 @@ export class StateAddComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.data?.title;
-     this.getCountries();
+    //  this.getCountries();
     this.stateForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern("[a-zA-Z ]*"), trimValidator]],
-      country: this.countryControl
+      // country: this.countryControl
     });
     if (this.data?.id) {
       this.stateService.getStateById(this.data?.id).toPromise().then((data:any)=>{
         this.id = data?.id;
         this.stateForm.patchValue({
           name: data?.name,
-          country: data?.country
+          // country: data?.country
         });
       })
     }
     this.isSubmit = false;
   }
 
-  onSelectionChange (event){
-     this.selectedCountry = event;
-  }
+  // onSelectionChange (event){
+  //    this.selectedCountry = event;
+  // }
 
-  getCountries  =  () =>  {
-    this.locationService.getAllCountries().subscribe((data: any[]) => {
-      this.countries = data;
-      this.datatrigger.emit(this.countries);
-    })
-  }
+  // getCountries  =  () =>  {
+  //   this.locationService.getAllCountries().subscribe((data: any[]) => {
+  //     this.countries = data;
+  //     this.datatrigger.emit(this.countries);
+  //   })
+  // }
 
   submitForm = () => {
     this.isSubmit = true;
@@ -96,8 +96,8 @@ export class StateAddComponent implements OnInit {
   cancel = () => {
     this.dialogRef.close(true);
   }
-  saveCountry = (value: any) => {
-    this.selectedCountry = value;
-  }
+  // saveCountry = (value: any) => {
+  //   this.selectedCountry = value;
+  // }
 
 }

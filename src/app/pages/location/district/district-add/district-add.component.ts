@@ -17,7 +17,7 @@ export class DistrictAddComponent implements OnInit {
   protected _onDestroy = new Subject<void>();
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
-  countryControl:FormControl = new FormControl("",Validators.required);
+  // countryControl:FormControl = new FormControl("",Validators.required);
   stateControl:FormControl = new FormControl("",Validators.required);
 
 
@@ -25,9 +25,9 @@ export class DistrictAddComponent implements OnInit {
   districtForm: FormGroup;
   id: string;
   title: string;
-  countries = [];
+  // countries = [];
+  // selectedCountry: any;
   states = [];
-  selectedCountry: any;
   selectedState: any;
   constructor(public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<any>,
@@ -39,10 +39,10 @@ export class DistrictAddComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.data?.title;
-    this.getCountries();
+    // this.getCountries();
     this.districtForm = this.formBuilder.group({
       name: ['', [Validators.required, trimValidator]],
-      country: this.countryControl,
+      // country: this.countryControl,
       state: this.stateControl
     });
     if (this.data.id) {
@@ -50,7 +50,7 @@ export class DistrictAddComponent implements OnInit {
         this.id = data?.id;
         this.getStates(data?.state?.country.id)
         this.districtForm.patchValue({
-          country: data?.state?.country,
+          // country: data?.state?.country,
           state: data?.state,
           name: data?.name
         });
@@ -60,15 +60,15 @@ export class DistrictAddComponent implements OnInit {
 
 
 
-  getCountries = () => {
-    this.locationService.getAllCountries().subscribe((data: any[]) => {
-      this.countries = data;
-    })
-  }
+  // getCountries = () => {
+  //   this.locationService.getAllCountries().subscribe((data: any[]) => {
+  //     this.countries = data;
+  //   })
+  // }
 
   changeState = (event:any)=>{
     this.stateControl.setValue("");
-    this.selectedCountry = event;
+    // this.selectedCountry = event;
     this.getStates(event?.id)
   }
 
