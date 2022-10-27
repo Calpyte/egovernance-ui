@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as Highcharts from 'highcharts';
 import { DashboardService } from '../dashboard.service';
 
@@ -11,14 +12,21 @@ import { DashboardService } from '../dashboard.service';
 export class UserChartsComponent implements OnInit {
   @ViewChild("charts", { static: true }) public chartEl: ElementRef;
   @ViewChild("activity",{ static: true }) public activityChart: ElementRef;
+  // chartTarget: ElementRef<any>
+
 
   myCustomOptions: any = {};
   chart: any = [];
-  chartArray: any = [
-  ];
+  chartArray: any = ["activity"];
   jsonData: any = [];
   cardArray: any[] = [];
-  options:any= [{"id":0,"name":"Past 7 days"},{"id":1,"name":"Past 14 days"}];
+  options:any= [
+    {"id":7,"name":"Past 7 days"},
+    {"id":14,"name":"Past 14 days"},
+    {"id":30,"name":"Past 30 days"},
+    {"id":60,"name":"Past 60 days"},
+    {"id":90,"name":"Past 90 days"}
+  ];
   selectedOption:any = [];
   count:any = [];
   charts:any;
@@ -26,19 +34,30 @@ export class UserChartsComponent implements OnInit {
   ratings:any = Array;
   chartForm:FormGroup;
 
+  activity:Highcharts.Chart;
+  activityOption:Highcharts.Options;
 
-  constructor(private dashboardService: DashboardService,private formBuilder:FormBuilder) {
 
+
+  constructor(
+    private dashboardService: DashboardService,private formBuilder:FormBuilder,
+    private route:Router) {
+
+  }
+
+  getPage=(card:any)=>{
+     this.route.navigate(["pages/"+ card?.key.toLowerCase()]);
   }
 
   ngOnInit() {
     this.chartForm = this.formBuilder.group({
       type:[""]
-    })
+    });
     this.dashboardService.getDashBoardCount().toPromise().then((data:any[])=>{
       this.cardArray = data;
     })
-
+    this.selectedOption = this.options[0];
+    this.onOptionChange(0);
   }
 
   onOptionChange=(event:any)=>{
@@ -47,7 +66,7 @@ export class UserChartsComponent implements OnInit {
       this.myOptions.xAxis.categories = [];
       this.charts = data;
       this.charts?.chartData.forEach(element => {
-        this.myOptions.series[0].data.push(element?.rating);
+        this.myOptions.series[0].data.push(element?.value);
         this.myOptions.xAxis.categories.push(element?.key);
       });
       this.myOptions.yAxis.title.text = this.charts?.ytitle;

@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonToastrService } from '../../../common-shared/common-toastr/common-toastr.service';
 import { MultiSelectComponent } from '../../../common-shared/multi-select/multi-select.component';
 import { trimValidator } from '../../../common-shared/trim.validator';
+import { DistrictService } from '../../location/district/district.service';
+import { TalukService } from '../../location/taluk/taluk.service';
+import { VillageService } from '../../location/village/village.service';
 import { OfficeService } from '../../office/office.service';
 import { UserService } from '../../user/user.service';
 import { OfficerService } from '../officer.service';
@@ -31,24 +34,10 @@ export class OfficerAddComponent implements OnInit {
   email: String;
   villages:any;
   selectedVillage:any=[];
-  visibilities:any = [
-   {
-    "id":"0","name":"Only me"
-   },
-   {
-    "id":"1","name":"Block"
-   },
-   {
-    "id":"2","name":"District"
-   },
-   {
-    "id":"3","name":"Office"
-   },
-   {
-    "id":"4","name":"All"
-   }
-  ];
-  selectedVisibility:any =[];
+  options:any = [];
+  selectedOption:any = [];
+  label:any = "Option";
+
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -57,7 +46,10 @@ export class OfficerAddComponent implements OnInit {
     private officerService: OfficerService,
     public formBuilder: FormBuilder,
     private userService:UserService,
-    private officeService:OfficeService
+    private officeService:OfficeService,
+    private districtService:DistrictService,
+    private villageService:VillageService,
+    private talukService:TalukService
   ) { }
 
    ngOnInit() {
@@ -107,7 +99,23 @@ export class OfficerAddComponent implements OnInit {
   }
 
   onRoleChange=(event:any)=>{
-     console.log(event)
+    this.options = [];
+     if(event?.dataVisibility == 6){
+         this.districtService.getAllDistricts().toPromise().then((data:any[])=>{
+           this.label= "District";
+           this.options = data;
+         })
+     }else if(event?.dataVisibility == 5){
+        this.villageService.getAllVillages().toPromise().then((data:any[])=>{
+          this.label= "Village";
+          this.options = data;
+        })
+     }else if(event?.dataVisibility == 4){
+       this.talukService.getAllTaluk().toPromise().then((data:any[])=>{
+        this.label= "Block"
+        this.options = data;
+     })
+     }
   }
 
   getVillages=()=>{

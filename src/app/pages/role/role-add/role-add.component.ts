@@ -48,7 +48,7 @@ export class RoleAddComponent implements OnInit {
           .toPromise()
           .then((data: any) => {
             this.id = data?.id;
-            this.selectedVisibility = data?.dataVisibility;
+            this.selectedVisibility = this.visibilities[data?.dataVisibility - 1];
             this.roleForm.patchValue({ name: data?.name,dataVisibility:this.selectedVisibility});
           });
       }
@@ -59,7 +59,7 @@ export class RoleAddComponent implements OnInit {
       this.isSubmit = true;
       this.visibilityMultiSelectComponent.formInvalid();
       this.saveEvent.emit(true);
-      this.roleForm.patchValue({dataVisibility:this.selectedVisibility})
+      this.roleForm.patchValue({dataVisibility:this.selectedVisibility?.id})
       let data = this.roleForm?.value;
       if (this.id) {
         data.id = this.id;
