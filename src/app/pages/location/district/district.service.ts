@@ -17,7 +17,7 @@ export class DistrictService {
       "pageNo": pageNumber,
       "pageSize": postPerPage
     }
-    return this.commonHttpClientService.httpPost(this.appConfiguration.district.getAll, data);
+    return this.commonHttpClientService.httpPost(this.appConfiguration.district.get, data);
   }
 
   addDistrict = (data: any) => {
@@ -34,5 +34,9 @@ export class DistrictService {
 
   randomNumber = () => {
     return Math.floor((Math.random() * 100) + 1);
+  }
+
+  getAllDistricts=()=>{
+    return this.commonHttpClientService.httpGet(this.appConfiguration.district.getAll);
   }
 }

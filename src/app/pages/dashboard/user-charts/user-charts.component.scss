@@ -29,3 +29,22 @@
   border-radius:  10px;
 }
 
+.info {
+  border-color: white;
+  color:white;
+  margin-left: 1%;
+  border-radius:  10px;
+  width: 100%;
+  background:white;
+  margin-bottom: 2%;
+  box-shadow: 5px 5px 5px lightgray;
+
+}
+
+.info:hover {
+  background:white;
+  color: white;
+}
+.span{
+  text-align: left;
+}

@@ -15,7 +15,7 @@ export class TalukService {
       "pageNo": pageNumber,
       "pageSize": postPerPage
     }
-    return this.commonHttpClientService.httpPost(this.appConfiguration.taluk.getAll, data);
+    return this.commonHttpClientService.httpPost(this.appConfiguration.taluk.get, data);
   }
 
   addTaluk = (data: any) => {

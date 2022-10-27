@@ -1,4 +1,4 @@
-<div class="row col-12">
+<!-- <div class="row col-12">
       <div class="col-lg-3" *ngFor="let card of cardArray">
         <div class="card-box bg-white">
           <div class="inner">
@@ -7,14 +7,17 @@
           </div>
         </div>
       </div>
-  </div>
+  </div> -->
+    <button *ngFor="let card of cardArray" class="btn info col-md-2" (click)="getPage(card)"> <span class="span">
+      <h5>{{ card?.key }}</h5>
+      <p>{{ card?.value }}</p>
+    </span></button>
   <!-- <div class="row" #charts id="charts"></div> -->
 <nb-card class="card">
   <nb-card-body>
     <form [formGroup]="chartForm">
-
-      <div class="col-6">
-        <div class="col-12">
+      <div class="col-md-6">
+        <div class="col-md-12">
           <app-multi-select
           #chartMultiSelect
           isMultiSelect="false"
@@ -24,11 +27,12 @@
           appearance="standard"
           [(dropDownValue)]="selectedOption"
           (dropDownValueChange)="onOptionChange($event)"
-
         >
         </app-multi-select>
         </div>
-        <div id="activity" #activity></div>
+        <div id="chart">
+          <div id="activity" #activity></div>
+        </div>
       </div>
       </form>
   </nb-card-body>

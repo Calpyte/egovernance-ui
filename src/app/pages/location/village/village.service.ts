@@ -17,7 +17,7 @@ export class VillageService {
       "pageNo": pageNumber,
       "pageSize": postPerPage
     }
-    return this.commonHttpClientService.httpPost(this.appConfiguration.village.getAll, data);
+    return this.commonHttpClientService.httpPost(this.appConfiguration.village.get, data);
   }
 
   addVillage = (data: any) => {
@@ -25,7 +25,7 @@ export class VillageService {
   }
 
   getAllVillages = () =>{
-    return this.commonHttpClientService.httpGet(this.appConfiguration.village.get);
+    return this.commonHttpClientService.httpGet(this.appConfiguration.village.getAll);
   }
 
   getVillageById = (id: string) => {
