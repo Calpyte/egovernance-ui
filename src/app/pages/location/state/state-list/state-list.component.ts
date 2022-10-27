@@ -43,7 +43,7 @@ export class StateListComponent implements OnInit {
       datas.data.forEach((data: any, index: number) => {
         let obj = {
           name: data?.name,
-          country: data?.country?.name,
+          // country: data?.country?.name,
           id: data?.id
         };
         this.states.push(obj);
