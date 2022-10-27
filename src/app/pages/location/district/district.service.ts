@@ -25,7 +25,7 @@ export class DistrictService {
   }
 
   getDistrictById = (id: string) => {
-    return this.commonHttpClientService.httpGet(this.appConfiguration.district.gettById+id);
+    return this.commonHttpClientService.httpGet(this.appConfiguration.district.getById+id);
   }
 
   deleteDistrict = (id: string) => {
@@ -37,6 +37,13 @@ export class DistrictService {
   }
 
   getAllDistricts=()=>{
-    return this.commonHttpClientService.httpGet(this.appConfiguration.district.getAll);
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.district.getAll
+      );
+  }
+  getAllStates = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.state.getStates
+    );
   }
 }

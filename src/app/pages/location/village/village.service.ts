@@ -35,6 +35,26 @@ export class VillageService {
   deleteVillage = (id: string) => {
     return this.commonHttpClientService.httpGet(this.appConfiguration.village.delete + id);
   }
+  getAllTaluks = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.taluk.getTaluks
+    );
+  }
+  getAllDistricts = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.district.getDistricts
+    );
+  }
+  getAllStates = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.state.getStates
+    );
+  }
+  getAllVillage = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.village.getAllVillages
+    );
+  }
   randomNumber = () => {
     return Math.floor((Math.random() * 100) + 1);
   }

@@ -21,6 +21,18 @@ export class StateService {
     return this.commonHttpClientService.httpPost(this.appConfiguration.state.getAll, data);
   }
 
+  getAllStates = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.state.getAll
+    )
+  }
+
+  getStates = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.state.getStates
+    );
+  }
+
   addState = (data: any) => {
     return this.commonHttpClientService.httpPost(this.appConfiguration.state.save, data);
   }

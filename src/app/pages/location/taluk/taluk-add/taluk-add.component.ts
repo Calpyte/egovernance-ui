@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, Form } from '@angular/
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { CommonToastrService } from '../../../../common-shared/common-toastr/common-toastr.service';
+import { MultiSelectComponent } from '../../../../common-shared/multi-select/multi-select.component';
 import { trimValidator } from '../../../../common-shared/trim.validator';
 import { LocationService } from '../../location.service';
 import { TalukService } from '../taluk.service';
@@ -14,20 +15,19 @@ import { TalukService } from '../taluk.service';
 })
 export class TalukAddComponent implements OnInit {
 
+  @ViewChild("districtMultiSelect", { static: false }) districtMultiSelectComponent: MultiSelectComponent;
+  @ViewChild("stateMultiSelect", { static: false }) stateMultiSelectComponent: MultiSelectComponent;
+
   public event: EventEmitter<any> = new EventEmitter();
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
-  countryControl:FormControl = new FormControl("",Validators.required);
-  stateControl:FormControl = new FormControl("",Validators.required);
-  districtControl:FormControl = new FormControl("",Validators.required);
+
   isSubmit: boolean = false;
   talukForm: FormGroup;
   id: string;
   title: string;
-  countries = [];
   states = [];
   districts = [];
-  selectedCountry: any;
   selectedState: any;
   selectedDistrict: any;
 
@@ -39,23 +39,22 @@ export class TalukAddComponent implements OnInit {
     private commonToastrService:CommonToastrService) { }
 
   ngOnInit() {
-    this.getCountries();
+    this.getAllDistricts();
+    this.getAllStates();
     this.title = this.data?.title;
     this.talukForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern("[a-zA-Z ]*"), trimValidator]],
-      country: this.countryControl,
-      state: this.stateControl,
-      district:this.districtControl
+      state:[""],
+      district:[""],
     });
     if (this.data.id) {
       this.talukService.getTalukById(this.data?.id).toPromise().then((data:any)=>{
         this.id = data?.id;
-        this.getStates(data?.district?.state?.country?.id);
-        this.getDistricts(data?.district?.state?.id);
+        this.selectedState=data.state;
+        this.selectedDistrict=data.district;
         this.talukForm.patchValue({
-          country:  data?.district?.state?.country,
-          state: data?.district?.state,
-          district: data?.district,
+          state:this.selectedState,
+          district:this.selectedDistrict,
           name: data?.name
         });
       })
@@ -66,38 +65,38 @@ export class TalukAddComponent implements OnInit {
     this.selectedDistrict = event;
   }
 
-  changeState = (event) => {
-    this.selectedCountry = event;
-    this.stateControl.setValue("");
-    this.getStates(event?.id);
-  }
-  changeDistrict = (event) => {
-    this.selectedState = event;
-    this.districtControl.setValue("");
-    this.getDistricts(event?.id);
+  // changeState = (event) => {
+  //   // this.selectedCountry = event;
+  //   this.selectedState.setValue("");
+  //   this.getAllStates(event?.id);
+  // }
+  // changeDistrict = (event) => {
+  //   this.selectedState = event;
+  //   this.selectedDistrict.setValue("");
+  //   this.getAllDistricts(event?.id);
 
-  }
+  // }
 
-  getCountries = () => {
-    this.locationService.getAllCountries().subscribe((data: any[]) => {
-      this.countries = data;
-    })
-  }
-
-  getStates = (id) => {
-    this.locationService.getAllStateByCountry(id).subscribe((data: any[]) => {
-      this.states = data;
-    })
-  }
-  getDistricts = (id) => {
-    this.locationService.getAllDistrictByState(id).subscribe((data: any[]) => {
-      this.districts = data;
-    })
-  }
+  // getStates = (id) => {
+  //   this.locationService.getAllStateByCountry(id).subscribe((data: any[]) => {
+  //     this.states = data;
+  //   })
+  // }
+  // getDistricts = (id) => {
+  //   this.locationService.getAllDistrictByState(id).subscribe((data: any[]) => {
+  //     this.districts = data;
+  //   })
+  // }
 
   submitForm = () => {
     this.isSubmit = true;
+    this.stateMultiSelectComponent.formInvalid();
+    this.districtMultiSelectComponent.formInvalid();
     this.saveEvent.emit(true);
+    this.talukForm.patchValue({
+      state:this.selectedState,
+      district:this.selectedDistrict
+    });
     let talukData = this.talukForm.value;
     if (this.id) {
       talukData.id = this.id;
@@ -122,6 +121,18 @@ export class TalukAddComponent implements OnInit {
   }
   cancel = () => {
     this.dialogRef.close(true);
+  }
+
+  getAllStates=()=>{
+    this.talukService.getAllStates().toPromise().then((data:any[])=>{
+       this.states = data;
+    })
+  }
+
+  getAllDistricts=()=>{
+    this.talukService.getAllDistricts().toPromise().then((data:any[])=>{
+       this.districts = data;
+    })
   }
 
 }

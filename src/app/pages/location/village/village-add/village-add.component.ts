@@ -2,7 +2,9 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } fro
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription, Observable, Subject } from 'rxjs';
+import { TemperatureHumidityService } from '../../../../@core/mock/temperature-humidity.service';
 import { CommonToastrService } from '../../../../common-shared/common-toastr/common-toastr.service';
+import { MultiSelectComponent } from '../../../../common-shared/multi-select/multi-select.component';
 import { trimValidator } from '../../../../common-shared/trim.validator';
 import { LocationService } from '../../location.service';
 import { VillageService } from '../village.service';
@@ -14,10 +16,9 @@ import { VillageService } from '../village.service';
 })
 export class VillageAddComponent implements OnInit {
   public event: EventEmitter<any> = new EventEmitter();
-  countryControl:FormControl = new FormControl("",Validators.required);
-  stateControl:FormControl = new FormControl("",Validators.required);
-  districtControl:FormControl = new FormControl("",Validators.required);
-  talukControl:FormControl = new FormControl("",Validators.required);
+  @ViewChild("districtMultiSelect", { static: false }) districtMultiSelectComponent: MultiSelectComponent;
+  @ViewChild("stateMultiSelect", { static: false }) stateMultiSelectComponent: MultiSelectComponent;
+  @ViewChild("selectedTaluk", { static: false }) talukMultiSelectComponent: MultiSelectComponent;
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
   protected _onDestroy = new Subject<void>();
@@ -25,11 +26,9 @@ export class VillageAddComponent implements OnInit {
   villageForm: FormGroup;
   id: string;
   title: string;
-  countries = [];
   states = [];
   districts = [];
   taluks = [];
-  selectedCountry: any;
   selectedState: any;
   selectedDistrict: any;
   selectedTaluk: any;
@@ -45,27 +44,26 @@ export class VillageAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCountries();
+    this.getAllStates();
+    this.getAllDistricts();
+    this.getAllTaluks();
     this.title = this.data?.title;
     this.villageForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern("[a-zA-Z ]*"), trimValidator]],
-      country: this.countryControl,
-      state: this.stateControl,
-      district: this.districtControl,
-      taluk: this.talukControl
+      state:[""],
+      district:[""],
+      taluk:['']
     });
     if (this.data?.id) {
       this.villageService.getVillageById(this.data?.id).subscribe((data: any) => {
         this.id = data?.id;
-        this.getStates(data?.taluk?.district?.state?.country?.id);
-        this.getDistricts(data?.taluk?.district?.state?.id);
-        this.getTaluk(data?.taluk?.district?.id);
+        this.selectedState=data.state;
+        this.selectedDistrict=data.district;
+        this.selectedTaluk=data.taluk;
         this.villageForm.patchValue({
-          country: data?.taluk?.district?.state?.country,
-          state: data?.taluk?.district?.state,
-          district: data?.taluk?.district,
-          taluk: data?.taluk,
-          name: data?.name
+          state:this.selectedState,
+          district:this.selectedDistrict,
+          taluk:this.selectedTaluk
         });
       })
     }
@@ -75,48 +73,49 @@ export class VillageAddComponent implements OnInit {
       this.selectedTaluk = event;
   }
 
-  getCountries = () => {
-    this.locationService.getAllCountries().subscribe((data: any[]) => {
-      this.countries = data;
-    })
-  }
+  // getStates = (id) => {
+  //   this.locationService.getAllStateByCountry(id).subscribe((data: any[]) => {
+  //     this.states = data;
+  //   })
+  // }
+  // getDistricts = (id) => {
+  //   this.locationService.getAllDistrictByState(id).subscribe((data: any[]) => {
+  //     this.districts = data;
+  //   })
+  // }
 
-  getStates = (id) => {
-    this.locationService.getAllStateByCountry(id).subscribe((data: any[]) => {
-      this.states = data;
-    })
-  }
-  getDistricts = (id) => {
-    this.locationService.getAllDistrictByState(id).subscribe((data: any[]) => {
-      this.districts = data;
-    })
-  }
+  // getTaluk = (id) => {
+  //   this.locationService.getAllTalukByDistrict(id).subscribe((data: any[]) => {
+  //     this.taluks = data;
+  //   })
+  // }
+  // changeState = (event) => {
+  //     // this.selectedCountry = event;
+  //     this.selectedState.setValue("");
+  //     this.getStates(event?.id);
+  // }
+  // changeDistrict = (event) => {
+  //   this.selectedDistrict.setValue("");
+  //   this.selectedState = event;
+  //   this.getDistricts(event?.id);
+  // }
 
-  getTaluk = (id) => {
-    this.locationService.getAllTalukByDistrict(id).subscribe((data: any[]) => {
-      this.taluks = data;
-    })
-  }
-  changeState = (event) => {
-      this.selectedCountry = event;
-      this.stateControl.setValue("");
-      this.getStates(event?.id);
-  }
-  changeDistrict = (event) => {
-    this.districtControl.setValue("");
-    this.selectedState = event;
-    this.getDistricts(event?.id);
-  }
-
-  changeTaluk = (event) => {
-    this.talukControl.setValue("");
-    this.selectedDistrict = event;
-    this.getTaluk(event?.id);
-  }
+  // changeTaluk = (event) => {
+  //   this.selectedTaluk.setValue("");
+  //   this.selectedDistrict = event;
+  //   this.getTaluk(event?.id);
+  // }
 
   submitForm = () => {
     this.isSubmit = true;
+    this.stateMultiSelectComponent.formInvalid();
+    this.districtMultiSelectComponent.formInvalid();
     this.saveEvent.emit(true);
+    this.villageForm.patchValue({
+      state:this.selectedState,
+      district:this.selectedDistrict,
+      taluk:this.selectedTaluk
+    });
     let villageData = this.villageForm.value;
     if (this.id) {villageData.id = this.id}
     this.sendForm(villageData);
@@ -149,6 +148,24 @@ export class VillageAddComponent implements OnInit {
   ngOnDestroy = () => {
     this._onDestroy.next();
     this._onDestroy.complete();
+  }
+
+  getAllStates=()=>{
+    this.villageService.getAllStates().toPromise().then((data:any[])=>{
+       this.states = data;
+    })
+  }
+
+  getAllDistricts=()=>{
+    this.villageService.getAllDistricts().toPromise().then((data:any[])=>{
+       this.districts = data;
+    })
+  }
+
+  getAllTaluks=()=>{
+    this.villageService.getAllTaluks().toPromise().then((data:any[]) => {
+      this.taluks = data;
+    })
   }
 
 }
