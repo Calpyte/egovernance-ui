@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
 
   {
-    title: 'User',
+    title: 'Master',
     icon: 'layout-outline',
     children: [
       {
@@ -29,13 +29,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/designation',
       },
       {
-        title: 'Role',
-        link: '/pages/role',
-      },
-      {
         title: 'User',
         link: '/pages/user',
       },
+      {
+        title: 'Location',
+        link: '/pages/location',
+      },
+    ],
+  },
+  {
+    title: 'Preference',
+    icon: 'layout-outline',
+    children: [
       {
         title: 'Office',
         link: '/pages/office',
@@ -45,14 +51,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/officer',
       },
       {
+        title: 'Role',
+        link: '/pages/role',
+      }
+    ]
+  },
+  {
+    title: 'Inspection',
+    icon: 'layout-outline',
+    children: [
+      {
         title: 'Activity',
         link: '/pages/activity',
       },
-      {
-        title: 'Location',
-        link: '/pages/location',
-      },
-    ],
+    ]
   },
   // {
   //   title: 'Miscellaneous',

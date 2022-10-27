@@ -23,7 +23,7 @@ export class StateService {
 
   getAllStates = () => {
     return this.commonHttpClientService.httpGet(
-      this.appConfiguration.state.getAll
+      this.appConfiguration.state.get
     )
   }
 
@@ -48,5 +48,4 @@ export class StateService {
   randomNumber = () => {
     return Math.floor((Math.random() * 100) + 1);
   }
-
 }
