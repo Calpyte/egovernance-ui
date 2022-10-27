@@ -8,7 +8,7 @@
 <form [formGroup]="districtForm">
   <div class="modal-body">
     <div class="row">
-      <div class="form-group col-md-6">
+      <!-- <div class="form-group col-md-6">
         <ngx-dropdown
         [selectControl]="countryControl"
         label="country"
@@ -16,7 +16,7 @@
         (selectionChange)="changeState($event)"
         [(selectedOption)]="selectedCountry"
         ></ngx-dropdown>
-      </div>
+      </div> -->
       <div class="form-group col-md-6">
         <ngx-dropdown [selectControl]="stateControl" label="state"
         [options]="states" (selectionChange)="onStateChange($event)" [(selectedOption)]="selectedState"
