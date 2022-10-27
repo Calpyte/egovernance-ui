@@ -1,6 +1,6 @@
 export enum LocationHeadingsEnum {
-  "State" = "State",
-  "District" = "District",
-  "Taluk" = "Taluk",
-  "Village" = "Village"
+  "State" = "Revenue Division",
+  "District" = "Taluk Name",
+  "Taluk" = "No Of Firkas",
+  "Village" = "No Of Village"
 }

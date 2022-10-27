@@ -8,25 +8,6 @@
 <form [formGroup]="talukForm">
   <div class="modal-body">
     <div class="row">
-      <!-- <div class="form-group col-md-6">
-        <ngx-dropdown
-        [selectControl]="countryControl"
-        label="country"
-        [options]="countries"
-        (selectionChange)="changeState($event)"
-        [(selectedOption)]="selectedCountry"
-        ></ngx-dropdown>
-      </div> -->
-      <!-- <div class="form-group col-md-6">
-          <ngx-dropdown
-          [selectControl]="stateControl"
-          label="state"
-          [options]="states"
-          (selectionChange)="changeDistrict($event)"
-          [(selectedOption)]="selectedState"
-          ></ngx-dropdown>
-      </div> -->
-
       <div class="form-group col-md-6">
         <div
           appearance="fill"
@@ -36,7 +17,7 @@
             #stateMultiSelect
             isMultiSelect="false"
             [options]="states"
-            label="State"
+            label="Revenue Division"
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedState"
@@ -44,15 +25,6 @@
           </app-multi-select>
         </div>
       </div>
-      <!-- <div class="form-group col-md-6">
-          <ngx-dropdown
-          [selectControl]="districtControl"
-          label="district"
-          [options]="districts"
-          (selectionChange)="onDistrictChange($event)"
-          [(selectedOption)]="selectedDistrict"
-          ></ngx-dropdown>
-      </div> -->
       <div class="form-group col-md-6">
         <div
           appearance="fill"
@@ -62,7 +34,7 @@
             #districtMultiSelect
             isMultiSelect="false"
             [options]="districts"
-            label="District"
+            label="Taluk Name"
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedDistrict"

@@ -36,7 +36,7 @@
             #stateMultiSelect
             isMultiSelect="false"
             [options]="states"
-            label="State"
+            label="Revenue Division"
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedState"
@@ -44,15 +44,6 @@
           </app-multi-select>
         </div>
       </div>
-      <!-- <div class="form-group col-lg-6">
-        <ngx-dropdown
-          [selectControl]="districtControl"
-          label="district"
-          [options]="districts"
-          (selectionChange)="changeTaluk($event)"
-          [(selectedOption)]="selectedDistrict"
-          ></ngx-dropdown>
-      </div> -->
       <div class="form-group col-md-6">
         <div
           appearance="fill"
@@ -62,7 +53,7 @@
             #districtMultiSelect
             isMultiSelect="false"
             [options]="districts"
-            label="District"
+            label="Taluk Name"
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedDistrict"
@@ -70,15 +61,6 @@
           </app-multi-select>
         </div>
       </div>
-      <!-- <div class="form-group col-lg-6">
-        <ngx-dropdown
-        [selectControl]="talukControl"
-        label="taluk"
-        [options]="taluks"
-        (selectionChange)="onTalukChange($event)"
-        [(selectedOption)]="selectedTaluk"
-        ></ngx-dropdown>
-      </div> -->
       <div class="form-group col-md-6">
         <div
           appearance="fill"
@@ -88,7 +70,7 @@
             #talukMultiSelect
             isMultiSelect="false"
             [options]="taluks"
-            label="Taluk"
+            label="No Of Firkas"
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedTaluk"

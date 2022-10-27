@@ -14,7 +14,7 @@ export class DistrictListComponent implements OnInit {
   @Output() editFromList = new EventEmitter();
   @Output() deleteFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ['name', 'state', 'actions'];
+  displayedColumns: string[] = ['name', 'Revenue Division', 'actions'];
   definedColumns = ['name', 'state'];
   searchColumns: any[] = [{name:'name',canShow:true}, {name:'state.name',canShow:true}];
   postPerPage: number = 10;

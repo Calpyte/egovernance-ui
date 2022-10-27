@@ -16,15 +16,13 @@ export class StateAddComponent implements OnInit {
   public event: EventEmitter<any> = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
   public savetrigger: EventEmitter<any> = new EventEmitter();
-  // countries = [];
-  // selectedCountry: any;
+
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
   isSubmit: boolean = false;
   stateForm: FormGroup;
   id: string;
   title: string;
-  // countryControl:FormControl = new FormControl("",Validators.required);
 
 
   constructor(
@@ -54,17 +52,6 @@ export class StateAddComponent implements OnInit {
     }
     this.isSubmit = false;
   }
-
-  // onSelectionChange (event){
-  //    this.selectedCountry = event;
-  // }
-
-  // getCountries  =  () =>  {
-  //   this.locationService.getAllCountries().subscribe((data: any[]) => {
-  //     this.countries = data;
-  //     this.datatrigger.emit(this.countries);
-  //   })
-  // }
 
   submitForm = () => {
     this.isSubmit = true;
@@ -96,8 +83,5 @@ export class StateAddComponent implements OnInit {
   cancel = () => {
     this.dialogRef.close(true);
   }
-  // saveCountry = (value: any) => {
-  //   this.selectedCountry = value;
-  // }
 
 }
