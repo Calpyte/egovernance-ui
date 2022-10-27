@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, Observable } from 'rxjs';
 import { CommonToastrService } from '../../../../common-shared/common-toastr/common-toastr.service';
+import { MultiSelectComponent } from '../../../../common-shared/multi-select/multi-select.component';
 import { trimValidator } from '../../../../common-shared/trim.validator';
 import { LocationService } from '../../location.service';
 import { DistrictService } from '../district.service';
@@ -13,20 +14,20 @@ import { DistrictService } from '../district.service';
   styleUrls: ['./district-add.component.scss']
 })
 export class DistrictAddComponent implements OnInit {
+
+  @ViewChild("stateMultiSelect", { static: false }) stateMultiSelectComponent: MultiSelectComponent;
+
   public event: EventEmitter<any> = new EventEmitter();
   protected _onDestroy = new Subject<void>();
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
   // countryControl:FormControl = new FormControl("",Validators.required);
-  stateControl:FormControl = new FormControl("",Validators.required);
-
+  // stateControl:FormControl = new FormControl("",Validators.required);
 
   isSubmit: boolean = false;
   districtForm: FormGroup;
   id: string;
   title: string;
-  // countries = [];
-  // selectedCountry: any;
   states = [];
   selectedState: any;
   constructor(public formBuilder: FormBuilder,
@@ -38,36 +39,26 @@ export class DistrictAddComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.title = this.data?.title;
     this.getStates();
-    // this.getCountries();
+    this.title = this.data?.title;
     this.districtForm = this.formBuilder.group({
       name: ['', [Validators.required, trimValidator]],
-      // country: this.countryControl,
-      state: this.stateControl
+      state:[""]
     });
     if (this.data.id) {
       this.districtService.getDistrictById(this.data?.id).toPromise().then((data:any)=>{
         this.id = data?.id;
+        this.selectedState=data.state;
         this.districtForm.patchValue({
-          // country: data?.state?.country,
-          state: data?.state,
-          name: data?.name
+          state:this.selectedState
+
         });
       })
     }
   }
 
-
-
-  // getCountries = () => {
-  //   this.locationService.getAllCountries().subscribe((data: any[]) => {
-  //     this.countries = data;
-  //   })
-  // }
-
   // changeState = (event:any)=>{
-  //   this.stateControl.setValue("");
+  //   this.selectedState.setValue("");
   //   // this.selectedCountry = event;
   //   this.getStates(event?.id)
   // }
@@ -76,15 +67,13 @@ export class DistrictAddComponent implements OnInit {
     this.selectedState = event;
  }
 
-
-  getStates = () => {
-    this.locationService.getAllStates().subscribe((data: any[]) => {
-      this.states = data;
-    });
-  }
   submitForm = () => {
     this.isSubmit = true;
+    this.stateMultiSelectComponent.formInvalid();
     this.saveEvent.emit(true);
+    this.districtForm.patchValue({
+      state:this.selectedState
+    });
     let districtData = this.districtForm.value;
     if (this.id) {
       districtData.id = this.id;
@@ -118,6 +107,12 @@ export class DistrictAddComponent implements OnInit {
   ngOnDestroy = () =>  {
     this._onDestroy.next();
     this._onDestroy.complete();
+  }
+
+  getStates=()=>{
+    this.districtService.getAllStates().toPromise().then((data:any[])=>{
+       this.states = data;
+    })
   }
 
 }

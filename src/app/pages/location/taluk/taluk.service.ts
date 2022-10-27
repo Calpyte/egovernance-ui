@@ -32,6 +32,21 @@ export class TalukService {
   getAllTaluk = () => {
     return this.commonHttpClientService.httpGet(this.appConfiguration.taluk.getAll);
   }
+  getAllTaluks = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.taluk.getTaluks
+    );
+  }
+  getAllDistricts = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.district.getDistricts
+    );
+  }
+  getAllStates = () => {
+    return this.commonHttpClientService.httpGet(
+      this.appConfiguration.state.getStates
+    );
+  }
   randomNumber = () => {
     return Math.floor((Math.random() * 100) + 1);
   }

@@ -62,7 +62,7 @@ export class AppConfiguration {
     getActivityById:"governance/activity/by-id?id=",
     getAllActivities:"governance/activity/",
   }
-  
+
   //location
 
   state = {
@@ -70,7 +70,8 @@ export class AppConfiguration {
     getAll : "governance/state/",
     getById : "governance/state/by-id?id=",
     get : "governance/state/state",
-    delete : "governance/state/delete?id="
+    delete : "governance/state/delete?id=",
+    getStates: "governance/state/state"
   }
 
    district = {
@@ -78,10 +79,11 @@ export class AppConfiguration {
     get : "governance/district",
     getAll : "governance/district/districts",
     delete : "governance/district/delete?id=",
-    gettById : "governance/district/by-id?id=",
-    getAllDistrictByState : "governance/district/by-state?state="
+    getById : "governance/district/by-id?id=",
+    getAllDistrictByState : "governance/district/by-state?state=",
+    getDistricts: "governance/district/districts"
    }
-    
+
   taluk = {
     save : "governance/taluk/save",
     get : "governance/taluk/",
@@ -89,25 +91,27 @@ export class AppConfiguration {
     delete : "governance/taluk/delete?id=",
     getById : "governance/taluk/by-id?id==",
     getAllTalukByDistrict : "governance/taluk/by-district?district=",
+    getTaluks: "governance/taluk/taluks"
   }
-   
+
   village = {
     save : "governance/village/save",
     get : "governance/village/",
     getAll : "governance/village/Villages",
     delete : "governance/village/delete?id=",
     getById : "governance/village/by-id?id=",
-    getVillageByTaluk : "governance/village/by-taluk?taluk="
+    getVillageByTaluk : "governance/village/by-taluk?taluk=",
+    getAllVillages: "governance/village/Villages"
   }
 
   location = {
     locationCount : "governance/location"
   }
-    
-  
-    
-  
-   
+
+
+
+
+
 
 
   officer={

@@ -38,21 +38,31 @@ export class DistrictListComponent implements OnInit {
     });
     this.loadData()
   }
-  loadData = () => {
-    this.districtService.getDistrict(this.postPerPage, this.pageNumber, this.filters).subscribe((datas: any) => {
-      this.districts = [];
-      datas.data.forEach((data: any, index: number) => {
-        var obj = {
-          name: data.name,
-          country: data?.state?.country?.name,
-          state: data?.state?.name,
-          id: data?.id
-        };
-        this.districts.push(obj);
-      })
-      this.count = datas?.recordsTotal;
-      this.datatrigger.emit(this.districts);
-    })
+  // loadData = () => {
+  //   this.districtService.getDistrict(this.postPerPage, this.pageNumber, this.filters).subscribe((datas: any) => {
+  //     this.districts = [];
+  //     datas.data.forEach((data: any, index: number) => {
+  //       var obj = {
+  //         name: data.name,
+  //         country: data?.state?.country?.name,
+  //         state: data?.state?.name,
+  //         id: data?.id
+  //       };
+  //       this.districts.push(obj);
+  //     })
+  //     this.count = datas?.recordsTotal;
+  //     this.datatrigger.emit(this.districts);
+  //   })
+  // }
+  loadData() {
+    this.districtService
+      .getDistrict(this.postPerPage, this.pageNumber, this.filters)
+      .toPromise()
+      .then((datas: any) => {
+        this.districts = datas?.data;
+        this.datatrigger.emit(this.districts);
+        this.count = datas?.recordsTotal;
+      });
   }
   onPaginate = (pageObject) => {
     this.postPerPage = pageObject.postPerPage;

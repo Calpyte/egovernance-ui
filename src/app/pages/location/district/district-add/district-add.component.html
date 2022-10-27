@@ -17,10 +17,27 @@
         [(selectedOption)]="selectedCountry"
         ></ngx-dropdown>
       </div> -->
-      <div class="form-group col-md-6">
+      <!-- <div class="form-group col-md-6">
         <ngx-dropdown [selectControl]="stateControl" label="state"
         [options]="states" (selectionChange)="onStateChange($event)" [(selectedOption)]="selectedState"
         ></ngx-dropdown>
+      </div> -->
+      <div class="form-group col-md-6">
+        <div
+          appearance="fill"
+          class="full-width"
+        >
+          <app-multi-select
+            #stateMultiSelect
+            isMultiSelect="false"
+            [options]="states"
+            label="State"
+            [isSubmit]="isSubmit"
+            [isRequired]="true"
+            [(dropDownValue)]="selectedState"
+          >
+          </app-multi-select>
+        </div>
       </div>
       <div class="col-md-12">
         <div class="form-group">

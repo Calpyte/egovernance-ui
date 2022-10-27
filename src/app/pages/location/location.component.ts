@@ -18,7 +18,6 @@ import { VillageAddComponent } from './village/village-add/village-add.component
 })
 export class LocationComponent implements OnInit {
  //Trigger reload to list
- countryReloadEvent: Subject<void> = new Subject<void>();
  stateReloadEvent: Subject<void> = new Subject<void>();
  districtReloadEvent: Subject<void> = new Subject<void>();
  talukReloadEvent: Subject<void> = new Subject<void>();
@@ -48,13 +47,13 @@ export class LocationComponent implements OnInit {
 
  async ngOnInit() {
    this.getLocationCount();
-  //  this.headerTextChange();
+   this.headerTextChange();
  }
 
-//  tabChanged = (index: number): void => {
-//    this.selectedTab = this.headings[index];
-//    this.headerTextChange();
-//  };
+ tabChanged = (index: number): void => {
+   this.selectedTab = this.headings[index];
+   this.headerTextChange();
+ };
 
  add = () => {
    let data = { title: 'Add ' + this.selectedTab };
@@ -150,7 +149,7 @@ export class LocationComponent implements OnInit {
  getLocationCount = () => {
    this.locationService.getLocationCount().subscribe((data: any) => {
      this.locationCount = {
-       State: data.state,
+       States: data.states,
        District: data.district,
        Taluk: data.taluk,
        Village: data.village,
