@@ -62,6 +62,7 @@ const routes: Routes = [{
     },
     {
       path: 'location',
+      canActivate:[AuthGuard],
       loadChildren: () => import('../pages/location/location.module')
         .then(m => m.LocationModule)
     },

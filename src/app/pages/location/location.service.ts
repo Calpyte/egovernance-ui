@@ -39,7 +39,11 @@ export class LocationService {
   }
 
   getAllVillages() {
-     return this.commonHttpClientService.httpGet(this.appConfiguration.village.get);
+     return this.commonHttpClientService.httpGet(this.appConfiguration.village.getAll);
+  }
+
+  getAllStates=()=>{
+    return this.commonHttpClientService.httpGet(this.appConfiguration.state.get);
   }
 
 

@@ -39,6 +39,7 @@ export class DistrictAddComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.data?.title;
+    this.getStates();
     // this.getCountries();
     this.districtForm = this.formBuilder.group({
       name: ['', [Validators.required, trimValidator]],
@@ -48,7 +49,6 @@ export class DistrictAddComponent implements OnInit {
     if (this.data.id) {
       this.districtService.getDistrictById(this.data?.id).toPromise().then((data:any)=>{
         this.id = data?.id;
-        this.getStates(data?.state?.country.id)
         this.districtForm.patchValue({
           // country: data?.state?.country,
           state: data?.state,
@@ -66,19 +66,19 @@ export class DistrictAddComponent implements OnInit {
   //   })
   // }
 
-  changeState = (event:any)=>{
-    this.stateControl.setValue("");
-    // this.selectedCountry = event;
-    this.getStates(event?.id)
-  }
+  // changeState = (event:any)=>{
+  //   this.stateControl.setValue("");
+  //   // this.selectedCountry = event;
+  //   this.getStates(event?.id)
+  // }
 
   onStateChange(event){
     this.selectedState = event;
  }
 
 
-  getStates = (event:any) => {
-    this.locationService.getAllStateByCountry(event).subscribe((data: any[]) => {
+  getStates = () => {
+    this.locationService.getAllStates().subscribe((data: any[]) => {
       this.states = data;
     });
   }

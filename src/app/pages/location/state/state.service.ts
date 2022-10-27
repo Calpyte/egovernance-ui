@@ -37,4 +37,8 @@ export class StateService {
     return Math.floor((Math.random() * 100) + 1);
   }
 
+  getAllStates=()=>{
+    return this.commonHttpClientService.httpGet(this.appConfiguration.state.get);
+  }
+
 }
