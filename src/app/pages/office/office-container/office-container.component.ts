@@ -26,7 +26,7 @@ export class OfficeContainerComponent implements OnInit {
     this.openModal(OfficeAddComponent, data);
   };
   openModal = (component: any, data: any) => {
-    this.matDialogRef = this.responseModalService.openModalSM(component, data);
+    this.matDialogRef = this.responseModalService.openModalSMD(component, data);
     this.matDialogRef.afterClosed().subscribe((res) => {
        this.emitEventToReload();
     });
