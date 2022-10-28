@@ -18,7 +18,7 @@ export class StateService {
       "pageNo": pageNumber,
       "pageSize": postPerPage
     }
-    return this.commonHttpClientService.httpPost(this.appConfiguration.state.getAll, data);
+    return this.commonHttpClientService.httpPost(this.appConfiguration.state.get, data);
   }
 
   getAllStates = () => {

@@ -67,9 +67,9 @@ export class AppConfiguration {
 
   state = {
     save : "governance/state/save",
-    getAll : "governance/state/",
+    getAll : "governance/state/state",
     getById : "governance/state/by-id?id=",
-    get : "governance/state/state",
+    get : "governance/state/",
     delete : "governance/state/delete?id=",
     getStates: "governance/state/state"
   }

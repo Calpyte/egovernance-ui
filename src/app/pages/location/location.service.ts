@@ -43,7 +43,7 @@ export class LocationService {
   }
 
   getAllStates=()=>{
-    return this.commonHttpClientService.httpGet(this.appConfiguration.state.get);
+    return this.commonHttpClientService.httpGet(this.appConfiguration.state.getStates);
   }
 
 
