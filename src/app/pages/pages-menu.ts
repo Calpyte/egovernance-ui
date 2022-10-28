@@ -3,7 +3,7 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
-    icon: 'layout-outline',
+    icon: 'layers-outline',
     children: [
       {
         title: 'Dashboard',
@@ -58,7 +58,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Inspection',
-    icon: 'layout-outline',
+    icon: 'award-outline',
     children: [
       {
         title: 'Activity',
