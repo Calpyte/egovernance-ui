@@ -47,13 +47,13 @@ export class LocationComponent implements OnInit {
 
  async ngOnInit() {
    this.getLocationCount();
-   this.headerTextChange();
+  //  this.headerTextChange();
  }
 
- tabChanged = (index: number): void => {
-   this.selectedTab = this.headings[index];
-   this.headerTextChange();
- };
+//  tabChanged = (index: number): void => {
+//    this.selectedTab = this.headings[index];
+//    this.headerTextChange();
+//  };
 
  add = () => {
    let data = { title: 'Add ' + this.selectedTab };
@@ -149,7 +149,7 @@ export class LocationComponent implements OnInit {
  getLocationCount = () => {
    this.locationService.getLocationCount().subscribe((data: any) => {
      this.locationCount = {
-       States: data.states,
+       State: data.state,
        District: data.district,
        Taluk: data.taluk,
        Village: data.village,

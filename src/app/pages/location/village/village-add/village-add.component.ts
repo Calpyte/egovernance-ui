@@ -52,7 +52,7 @@ export class VillageAddComponent implements OnInit {
       name: ['', [Validators.required, Validators.pattern("[a-zA-Z ]*"), trimValidator]],
       state:[""],
       district:[""],
-      taluk:['']
+      taluk:[""]
     });
     if (this.data?.id) {
       this.villageService.getVillageById(this.data?.id).subscribe((data: any) => {
@@ -73,22 +73,6 @@ export class VillageAddComponent implements OnInit {
       this.selectedTaluk = event;
   }
 
-  // getStates = (id) => {
-  //   this.locationService.getAllStateByCountry(id).subscribe((data: any[]) => {
-  //     this.states = data;
-  //   })
-  // }
-  // getDistricts = (id) => {
-  //   this.locationService.getAllDistrictByState(id).subscribe((data: any[]) => {
-  //     this.districts = data;
-  //   })
-  // }
-
-  // getTaluk = (id) => {
-  //   this.locationService.getAllTalukByDistrict(id).subscribe((data: any[]) => {
-  //     this.taluks = data;
-  //   })
-  // }
   // changeState = (event) => {
   //     // this.selectedCountry = event;
   //     this.selectedState.setValue("");
@@ -106,10 +90,28 @@ export class VillageAddComponent implements OnInit {
   //   this.getTaluk(event?.id);
   // }
 
+  changeState = (event) => {
+    // this.selectedCountry = event;
+    this.selectedState.setValue("");
+    // this.getAllStates(event?.id);
+}
+changeDistrict = (event) => {
+  this.selectedDistrict.setValue("");
+  this.selectedState = event;
+  // this.getAllDistricts(event?.id);
+}
+
+changeTaluk = (event) => {
+  this.selectedTaluk.setValue("");
+  this.selectedDistrict = event;
+  // this.getAllTaluks(event?.data);
+}
+
   submitForm = () => {
     this.isSubmit = true;
     this.stateMultiSelectComponent.formInvalid();
     this.districtMultiSelectComponent.formInvalid();
+    // this.talukMultiSelectComponent.formInvalid();
     this.saveEvent.emit(true);
     this.villageForm.patchValue({
       state:this.selectedState,

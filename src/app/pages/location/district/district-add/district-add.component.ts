@@ -21,8 +21,6 @@ export class DistrictAddComponent implements OnInit {
   protected _onDestroy = new Subject<void>();
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
-  // countryControl:FormControl = new FormControl("",Validators.required);
-  // stateControl:FormControl = new FormControl("",Validators.required);
 
   isSubmit: boolean = false;
   districtForm: FormGroup;
@@ -57,11 +55,11 @@ export class DistrictAddComponent implements OnInit {
     }
   }
 
-  // changeState = (event:any)=>{
-  //   this.selectedState.setValue("");
-  //   // this.selectedCountry = event;
-  //   this.getStates(event?.id)
-  // }
+  changeState = (event:any)=>{
+    this.selectedState = event;
+    this.selectedState.setValue("");
+    // this.getStates(event?.id)
+  }
 
   onStateChange(event){
     this.selectedState = event;
@@ -114,5 +112,10 @@ export class DistrictAddComponent implements OnInit {
        this.states = data;
     })
   }
+  // getStates = (event:any) => {
+  //   this.districtService.getAllStates(event).subscribe((data: any[]) => {
+  //     this.states = data;
+  //   });
+  // }
 
 }
