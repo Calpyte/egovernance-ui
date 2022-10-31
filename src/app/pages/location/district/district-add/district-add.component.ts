@@ -28,6 +28,7 @@ export class DistrictAddComponent implements OnInit {
   title: string;
   states = [];
   selectedState: any;
+  datatrigger: any;
   constructor(public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -37,7 +38,7 @@ export class DistrictAddComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getStates();
+    this.getAllStates();
     this.title = this.data?.title;
     this.districtForm = this.formBuilder.group({
       name: ['', [Validators.required, trimValidator]],
@@ -46,9 +47,9 @@ export class DistrictAddComponent implements OnInit {
     if (this.data.id) {
       this.districtService.getDistrictById(this.data?.id).toPromise().then((data:any)=>{
         this.id = data?.id;
-        this.selectedState=data.state;
+        this.selectedState=data?.state;
         this.districtForm.patchValue({
-          state:this.selectedState
+          state:this?.selectedState
 
         });
       })
@@ -61,9 +62,22 @@ export class DistrictAddComponent implements OnInit {
     // this.getStates(event?.id)
   }
 
-  onStateChange(event){
+  onSelectionChange (event){
     this.selectedState = event;
  }
+
+//  getStates  =  () =>  {
+//   this.districtService.getAllStates().subscribe((data: any[]) => {
+//     this.states = data;
+//     this.datatrigger.emit(this.states);
+//   })
+// }
+getStates  =  () =>  {
+  this.locationService.getAllStates().subscribe((data: any[]) => {
+    this.states = data;
+    this.datatrigger.emit(this.states);
+  })
+}
 
   submitForm = () => {
     this.isSubmit = true;
@@ -107,15 +121,14 @@ export class DistrictAddComponent implements OnInit {
     this._onDestroy.complete();
   }
 
-  getStates=()=>{
+  getAllStates=()=>{
     this.districtService.getAllStates().toPromise().then((data:any[])=>{
        this.states = data;
     })
   }
-  // getStates = (event:any) => {
-  //   this.districtService.getAllStates(event).subscribe((data: any[]) => {
-  //     this.states = data;
-  //   });
-  // }
+
+  saveState= (value: any) => {
+    this.selectedState = value;
+  }
 
 }

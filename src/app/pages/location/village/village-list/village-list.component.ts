@@ -47,7 +47,6 @@ export class VillageListComponent implements OnInit {
       datas.data.forEach((data: any, index: number) => {
         var obj = {
           name: data.name,
-          country: data?.taluk?.district?.state?.country?.name,
           state: data?.taluk?.district?.state?.name,
           district: data?.taluk?.district?.name,
           taluk: data?.taluk?.name,
