@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
+import { AppConfiguration } from '../../../../common-shared/AppConfiguration';
+import { CommonHttpClientService } from '../../../../common-shared/commonHttpService';
 import { TalukService } from '../taluk.service';
 
 @Component({
@@ -23,7 +25,11 @@ export class TalukListComponent implements OnInit {
   count: number = 0;
   taluks: any[] = [];
   filters: any[] = [];
-  constructor(private talukService: TalukService) { }
+  constructor(
+    private talukService: TalukService,
+    private commonHttpClientService: CommonHttpClientService,
+    private appConfiguration: AppConfiguration
+    ) { }
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((data: any) => {
@@ -45,7 +51,6 @@ export class TalukListComponent implements OnInit {
       datas.data.forEach((data: any, index: number) => {
         var obj = {
           name: data.name,
-          country: data?.district?.state?.country?.name,
           state: data?.district?.state?.name,
           district: data?.district?.name,
           id: data?.id
