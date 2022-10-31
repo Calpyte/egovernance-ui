@@ -46,7 +46,7 @@ export class LocationComponent implements OnInit {
  }
 
  async ngOnInit() {
-   this.getLocationCount();
+  //  this.getLocationCount();
   //  this.headerTextChange();
  }
 
@@ -135,27 +135,27 @@ export class LocationComponent implements OnInit {
  };
 
  delete = (event: any) => {
-   this.getLocationCount();
+  //  this.getLocationCount();
  };
 
  openModal = (component: any, data: any) => {
    this.matDialogRef = this.responseModalService.openModalSM(component, data);
    this.matDialogRef.afterClosed().subscribe((res) => {
      this.emitEventToReload();
-     this.getLocationCount();
+    //  this.getLocationCount();
    });
  };
 
- getLocationCount = () => {
-   this.locationService.getLocationCount().subscribe((data: any) => {
-     this.locationCount = {
-       State: data.state,
-       District: data.district,
-       Taluk: data.taluk,
-       Village: data.village,
-     };
-   });
- };
+//  getLocationCount = () => {
+//    this.locationService.getLocationCount().subscribe((data: any) => {
+//      this.locationCount = {
+//        State: data.state,
+//        District: data.district,
+//        Taluk: data.taluk,
+//        Village: data.village,
+//      };
+//    });
+//  };
 
  headerTextChanging = (data: any)=>{
   this.selectedTab = data.tabTitle;

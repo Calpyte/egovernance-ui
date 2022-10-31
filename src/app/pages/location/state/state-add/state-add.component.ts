@@ -13,9 +13,6 @@ import { StateService } from '../state.service';
   styleUrls: ['./state-add.component.scss']
 })
 export class StateAddComponent implements OnInit {
-  public event: EventEmitter<any> = new EventEmitter();
-  public datatrigger: EventEmitter<any> = new EventEmitter();
-  public savetrigger: EventEmitter<any> = new EventEmitter();
 
   @Input() events: Observable<void>;
   @Output() saveEvent = new EventEmitter();
@@ -36,17 +33,14 @@ export class StateAddComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.data?.title;
-    //  this.getCountries();
     this.stateForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern("[a-zA-Z ]*"), trimValidator]],
-      // country: this.countryControl
     });
     if (this.data?.id) {
       this.stateService.getStateById(this.data?.id).toPromise().then((data:any)=>{
         this.id = data?.id;
         this.stateForm.patchValue({
           name: data?.name,
-          // country: data?.country
         });
       })
     }
@@ -77,8 +71,8 @@ export class StateAddComponent implements OnInit {
     return this.stateForm.controls;
   }
 
-  triggerEvent = () => {
-    this.event.emit({ data: true });
+  public onSelect(item) {
+    console.log('tag selected: value is ' + item);
   }
   cancel = () => {
     this.dialogRef.close(true);
