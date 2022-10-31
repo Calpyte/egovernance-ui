@@ -144,7 +144,7 @@ export class MultiSelectComponent
 
     let search = this.websiteMultiFilterCtrl.value;
     if (!search) {
-      this.filteredWebsitesMulti.next(this.options.slice());
+      this.filteredWebsitesMulti.next(this.options?.slice());
       return;
     } else {
       search = search.toLowerCase();
