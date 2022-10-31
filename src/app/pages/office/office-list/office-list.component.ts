@@ -16,9 +16,9 @@ export class OfficeListComponent implements OnInit {
   @Output() editFromList = new EventEmitter();
   @Output() deleteFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ["Name","Description","Latitude","longitude","actions"];
+  displayedColumns: string[] = ["Name","Description","Latitude","Longitude","actions"];
   searchColumns: any[] = [{ name: "name", canShow: true },{ name: "description", canShow: true }];
-  definedColumns = ["name", "description", "lat", "lon"];
+  definedColumns = ["name", "description", "lat", "lon",];
   filters: any[] = [];
   postPerPage: number = 10;
   pageNumber: number = 1;
@@ -46,6 +46,7 @@ export class OfficeListComponent implements OnInit {
         this.datatrigger.emit(this.offices);
         this.count = datas?.recordsTotal;
       });
+      console.log(this.loadData)
   }
 
   onPaginate = (pageObject) => {
@@ -55,6 +56,7 @@ export class OfficeListComponent implements OnInit {
   };
   edit = (rowId: any) => {
     this.editFromList.emit(rowId);
+    console.log(rowId)
   };
 
   onSearch = (filters: any[]) => {

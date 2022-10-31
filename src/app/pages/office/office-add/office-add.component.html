@@ -32,8 +32,7 @@
           [isSubmit]="isSubmit"
           [isRequired]="true"
           [(dropDownValue)]="selectedDepartments"
-          (dropDownValueChange)="onSelectionChange($event)"
-        >
+              >
         </app-multi-select>
       </div>
       <div class="form-group col-md-6">
@@ -57,7 +56,7 @@
             #districtMultiSelect
             isMultiSelect="false"
             [options]="districts"
-            label="Taluk Name"
+            label="districts"
             [isSubmit]="isSubmit"
             [isRequired]="true"
             [(dropDownValue)]="selectedDistrict"
